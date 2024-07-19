@@ -1,0 +1,102 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Mattia Bascelli">
+    
+    <link rel="stylesheet" href="src/style.css" />
+    <title>Knights of Gargantua</title>
+</head>
+<body>
+    <div id="introduction" class="show">
+        <div class="pg_umano"><img src="img/pg_umano.png" /></div>
+        <h1>Knights of Gargantua</h1>
+        <p>
+            Gargantua è un luogo inospitale, flagellato dal culto del velo. La corruzione ha infettato la carne, ed ora esseri immondi vagano per le vie di Gargantua...
+        </p>
+        <label for="name">Qual è il tuo nome Viandante?</label>
+        <input type="text" id="name" />
+        <button class="button" onclick="startGame()">Inizia a combattere!</button>
+    </div>
+    <div id="game-screen" class="hide">
+        <div class="battle" id="player">
+            <h1 id="player-name"></h1>
+            <p>Livello: <span id="player-level"></span></p>
+            <p>Salute: <span id="player-health"></span></p>
+            <p>Attacco: <span id="player-attack"></span></p>
+            <p>Punti esperienza: <span id="player-xp"></span></p>
+            <p>Monete: <span id="player-money"></span></p>
+            <p>Pozioni: <span id="player-healing-potion"></span></p>
+            <p id="weapon-durability"></p>
+            <p id="armor-durability"></p>
+            <hr />
+            <button class="button" onclick="attack()">ATTACCA</button>
+            <button class="potion button" onclick="healthUp()">CURATI</button><br />
+            <hr />
+            <button class="button" onclick="shop()">Mercante Errante</button>
+        </div>
+
+
+        <div class="battle" id="enemy">
+            <h1 id="enemy-name"></h1>
+            <p>Livello: <span id="enemy-level"></span></p>
+            <p>Salute: <span id="enemy-health"></span></p>
+            <p>Attacco: <span id="enemy-attack"></span></p>
+            <img src="" id="enemyimg" width="450" height="450" />
+            <hr />
+            <p id="hit-message"></p>
+            <p id="miss-message"></p>
+            <p id=loot-message></p>
+            <p id="level-up-message"></p>
+            <p id="broken-weapon-message"></p>
+
+        </div>
+    </div>
+
+    <!--Negozio-->
+    <div id="container_shop" class="hide">
+        <div id="shop">
+            <h3 id="money">Monete: <span id="money_shop"></span> monete</h3>
+            <p id="shop_message"></p>
+            <div id="weapon1" class="shop weapon">
+                <h4 id="w1_name"></h4>
+                <p>Attacco: <span id="w1_attack"></span></p>
+                <p>Resistenza: <span id="w1_durability"></span></p>
+                <p>Prezzo: <span id="w1_price"></span> monete</p>
+                <button class="button" onclick="buyWeapon1()">Compra</button>
+            </div>
+
+            <div id="weapon2" class="shop weapon">
+                <h4 id="w2_name"></h4>
+                <p>Attacco: <span id="w2_attack"></span></p>
+                <p>Resistenza: <span id="w2_durability"></span></p>
+                <p>Prezzo: <span id="w2_price"></span> monete</p>
+                <button class="button" onclick="buyWeapon2()">Compra</button>
+            </div>
+
+            <div id="shield1" class="shop shield">
+                <h4 id="shield1_name"></h4>
+                <p>Difesa: <span id="shield1_protection"></span></p>
+                <p>Resistenza: <span id="shield1_durability"></span></p>
+                <p>Prezzo: <span id="shield1_price"></span> monete</p>
+                <button class="button" onclick="buyShield1()">Compra</button>
+            </div>
+
+            <div id="shield2" class="shop shield">
+                <h4 id="shield2_name"></h4>
+                <p>Difesa: <span id="shield2_protection"></span></p>
+                <p>Resistenza: <span id="shield2_durability"></span></p>
+                <p>Prezzo: <span id="shield2_price"></span> monete</p>
+                <button class="button" onclick="buyShield2()">Compra</button>
+            </div>
+        </div>
+        <button id="close-shop" class="button" onclick="closeShop()">Esci dal negozio</button>
+    </div>
+
+    <script src="src/script.js"></script>
+</body>
+</html>
