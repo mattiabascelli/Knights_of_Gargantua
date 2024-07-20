@@ -74,18 +74,18 @@
 }
 
 #miss-message {
-    color: green;
+    color: firebrick;
     font-size: 20px;
 }
     
-}
+
 
 #level-up-message, #loot-message {
-    color: gold;
+    color: maroon;
     font-size: 20px;
 }
     
-}
+
 
 .bought {
     background-color: darkred !important;
