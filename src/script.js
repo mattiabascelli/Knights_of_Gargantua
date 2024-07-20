@@ -23,14 +23,17 @@ var merch_weapons = [
     { name: "Ascia delle Tenebre", attack: 4, price: 14, durability: 8 },
     { name: "Lama Oscura del Vespro", attack: 6, price: 18, durability: 12 },
     { name: "Fiamme Oscure", attack: 4, price: 12, durability: 8 },
-    { name: "Mietitrice d'anime", attack: 15, price: 45, durability: 20 }
+    { name: "Mietitrice d'anime", attack: 15, price: 45, durability: 20 },
+    { name: "Lama Devastatrice", attack: 10, price: 30, durability: 10 }
 ]
 
 var merch_armor = [
     { name: "Scudo D'ombra", protection: 2, durability: 8, price: 5 },
     { name: "Armatura Oscura", protection: 3, durability: 7, price: 3 },
     { name: "Armatura delle Fiamma Nera", protection: 4, durability: 10, price: 7 },
-    { name: "Armatura Oscura del  Vespro", protection: 10, durability: 15, price: 15 }
+    { name: "Armatura Oscura del  Vespro", protection: 10, durability: 15, price: 15 },
+    { name: "Scudo Torre Oscuro", protection: 7, durability: 10, price: 10 },
+    { name: "Armatura d'Ombra", protection: 5, durability: 5, price: 8 },
 ]
 
 //variabile globale che contiene il nome del mostro che uccide il protagonista
