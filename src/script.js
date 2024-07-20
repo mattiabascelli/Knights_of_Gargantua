@@ -173,7 +173,7 @@ function startEnemy() {
         <button class="button" onclick="restart()">Rinasci</button>
         </div>`
         }, 1000)
-        return player.name;
+        return new_winner;
 
 
     };
