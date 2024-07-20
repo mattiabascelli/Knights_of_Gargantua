@@ -1,4 +1,4 @@
-
+''
 //Dichiarazione valori iniziali giocatore
 var player = {
     level: 1,
@@ -19,18 +19,18 @@ var player = {
 
 //Dichiarazione armi e armature acquistabili
 var merch_weapons = [
-    { name: "Mannaia d'acciaio", attack: 2, price: 10, durability: 6 },
-    { name: "Ascia del Boia", attack: 4, price: 14, durability: 8 },
-    { name: "Stella del Mattino", attack: 6, price: 18, durability: 12 },
-    { name: "Catena Uncinata", attack: 4, price: 12, durability: 8 },
-    { name: "Spada degli Umili", attack: 15, price: 45, durability: 20 }
+    { name: "Lama Oscura", attack: 2, price: 10, durability: 6 },
+    { name: "Ascia delle Tenebre", attack: 4, price: 14, durability: 8 },
+    { name: "Lama Oscura del Vespro", attack: 6, price: 18, durability: 12 },
+    { name: "Fiamme Oscure", attack: 4, price: 12, durability: 8 },
+    { name: "Mietitrice d'anime", attack: 15, price: 45, durability: 20 }
 ]
 
 var merch_armor = [
-    { name: "Scudo del Credo", protection: 2, durability: 8, price: 5 },
-    { name: "Cotta di Maglio Nero", protection: 3, durability: 7, price: 3 },
-    { name: "Vesti dell'Inquisitore", protection: 4, durability: 10, price: 7 },
-    { name: "Armatura del Vespro", protection: 10, durability: 15, price: 15 }
+    { name: "Scudo D'ombra", protection: 2, durability: 8, price: 5 },
+    { name: "Armatura Oscura", protection: 3, durability: 7, price: 3 },
+    { name: "Armatura delle Fiamma Nera", protection: 4, durability: 10, price: 7 },
+    { name: "Armatura Oscura del  Vespro", protection: 10, durability: 15, price: 15 }
 ]
 
 //variabile globale che contiene il nome del mostro che uccide il protagonista
@@ -40,7 +40,7 @@ var new_winner;
 var enemy = {
     name: ["Xordar ", "Zhondor ", "Gorroth ", "Holtahgar ", "Martakith ","Drakthar ", "Zorgan ", "Brakkhus'tar ", "Velgorth ", "Ignar ", "Thalor'kur ", "Xerxes'za ", "Ulthorg ", "Vorgarath ", "Krynn'tor ",
         "Artharion ", "Borath'thug ", "Lazari'kerh ", "Morkain'thur "],
-    title: ["il silente", "la furia del Velo", "benedetto dal Velo", "il Santo", "il senza pietà", "alfiere di Shub'Zuray", "figlio di Velo", "la spada insaziabile", "l'impuro", "la follia errante", "il mai domo"]
+    title: ["il silente", "la furia del Velo", "benedetto dal Velo", "il Santo", "il senza pieta'", "alfiere di Shub'Zuray", "figlio di Velo", "la spada insaziabile", "l'impuro", "la follia errante", "il mai domato"]
 }
 
 function startGame() {
@@ -49,9 +49,9 @@ function startGame() {
     startPlayer();
     startEnemy();
     document.getElementById("introduction").classList.add("hide");
-    document.getElementById("introduction").classList.remove("show");
-    document.getElementById("game-screen").classList.add("show");
-    document.getElementById("game-screen").classList.remove("hide");
+    document.getElementById("introduction").classList.remove("container");
+    document.getElementById("game-screen").classList.add("container");
+    document.getElementById("game-screen").classList.remove("hidez");
 }
     function startPlayer() {
         //assegnazione dei valori all'eroe
@@ -59,16 +59,17 @@ function startGame() {
         document.getElementById("player-level").textContent = player.level;
         document.getElementById("player-health").textContent = player.health + "/" + player.max_health;
         document.getElementById("player-attack").textContent = player.attack + player.extra_attack;
+        document.getElementById("player-defense").textContent = player.defense;
         document.getElementById("player-xp").textContent = player.xp + "/" + player.max_xp;
         document.getElementById("player-money").textContent = player.money + "/" + player.max_money;
         document.getElementById("player-healing-potion").textContent = player.healing_potions + "/" + player.max_potions;
         if (player.armor_durability != 0) {//La resistenza di arma e scudo solo se equipaggiati
-            document.getElementById("armor-durability").textContent = "Resistenza Armatura: " + player.armor_durability;
+            document.getElementById("armor-durability").textContent = "Durata Incanto Difensivo: " + player.armor_durability;
         } else {
             document.getElementById("armor-durability").textContent = "";
         }
         if (player.weapon_durability != 0) {
-            document.getElementById("weapon-durability").textContent = "Resistenza Arma: " + player.weapon_durability;
+            document.getElementById("weapon-durability").textContent = "Durata Incanto Offensivo: " + player.weapon_durability;
         } else {
             document.getElementById("weapon-durability").textContent = "";
         }
@@ -99,7 +100,7 @@ function startEnemy() {
 
     function attack() {
         if (parseInt(document.getElementById("enemy-health").textContent) <= 0) {
-            document.getElementById("hit-message").textContent = "Non infierire sul cadavere!"
+            document.getElementById("hit-message").textContent = "Hai massacrato il tuo avversario!"
         } else {
             if (Math.floor(Math.random() * 10) >= 9) {//una possibilità su dieci di mancare il bersaglio
                 //ad ogni attacco il valore della salute viene estrapolato dalla scheda per non intaccare quello nell'array
@@ -112,7 +113,7 @@ function startEnemy() {
                 if (player.weapon_durability > 0) {
                     player.weapon_durability--;
                     if (player.weapon_durability == 0) {
-                        document.getElementById("broken-weapon-message").textContent = "La tua arma si è rotta!"
+                        document.getElementById("broken-weapon-message").textContent = "Incantamento offensivo esaurito!"
                         player.extra_attack = 0;
                     }
                 }
@@ -128,7 +129,7 @@ function startEnemy() {
 
     function enemyAttack() {//una possibilità su dieci di mancare il bersaglio
         if (Math.floor(Math.random() * 10) >= 9) {
-            document.getElementById("miss-message").textContent += "Sei stato mancato!"
+            document.getElementById("miss-message").textContent += "Riesci a schivare il colpo del mostro!"
         } else {
             clearMessages()
             let enemy_attack = parseInt(document.getElementById("enemy-attack").textContent);
@@ -137,7 +138,7 @@ function startEnemy() {
             if (player.armor_durability > 0) {
                 player.armor_durability--;
                 if (player.armor_durability == 0) {
-                    document.getElementById("hit-message").textContent = "L'armatura è danneggiata!"
+                    document.getElementById("hit-message").textContent = "Incantamento difensivo esaurito!"
                     player.defense = 0;
                 }
             }
@@ -163,19 +164,19 @@ function startEnemy() {
         setTimeout(function () {
             document.getElementById("game-screen").innerHTML += `<div id="death-screen">
         <h1>${player.name}, sei stato Sconfitto!</h1>
-        <p>${new_winner} ti ha massacrato.. la tua anima ora è stata risucchiata dal vuoto e ${new_winner} ha preso il tuo posto...
+        <p>${new_winner} ti ha massacrato.. la tua anima ora e' stata risucchiata dal vuoto.. ${new_winner} si e' impossessato del tuo corpo.. ma puoi provare a dominarlo...
         </p>
         <button class="button" onclick="restart()">Riprova</button>
         </div>`
         }, 1000)
-        return new_winner;
+        return player.name;
 
 
     };
 
     function restart() {
         player = {
-            name: new_winner,
+            name: player.name,
             level: 1,
             max_health: 25,
             health: 1,
@@ -184,6 +185,7 @@ function startEnemy() {
             xp: 0,
             max_xp: 50,
             money: 0,
+            max_money: 50,
             healing_potions: 2,
             max_potions: 5,
             weapon_durability: 0,
@@ -199,21 +201,19 @@ function startEnemy() {
     }
 
     function getLoot() {
-        //una possibilità su due di ottenere soldi, una su quattro di ottenere pozioni di attacco e una su quattro di ottenere pozioni di salute
+        
         let random = Math.floor(Math.random() * 3);
         let potions = Math.floor(Math.random() * 2 + 1);
         let money = Math.floor(Math.random() * (10 * player.level) + 1);
-        //if (potions > (player.level + 7)) {//Per evitare che, andando avanti nel gioco, si ottengano troppe pozioni
-        //    potions = (player.level + 7);
-        //}
+        
         switch (random) {
             case 0:
             case 1:
                 if ((player.money + money) > player.max_money) {
-                    loot = "La tua borsa delle monete è piena! Hai ottenuto "
+                    loot = "Hai accumulato troppa energia oscura! Hai ottenuto "
                     player.money = player.max_money;
                 } else {
-                    loot = "Hai ottenuto " + money + " monete e ";
+                    loot = "Hai ottenuto " + money + " energia oscura e ";
                     player.money += money;
                 }
                 break;
@@ -278,8 +278,8 @@ function startEnemy() {
             //Sparisce lo schermo di gioco ed entra quello del negozio
             document.getElementById("game-screen").classList.add("hide");
             document.getElementById("game-screen").classList.remove("show");
-            document.getElementById("container_shop").classList.add("show");
-            document.getElementById("container_shop").classList.remove("hide");
+            document.getElementById("container_shop").classList.add("container");
+            document.getElementById("container_shop").classList.remove("hidez");
 
             //Generazione di armi e scudi andando a pescare casualmnete dalle relative liste 
             let weapon1 = merch_weapons[Math.floor(Math.random() * merch_weapons.length)];
@@ -312,7 +312,7 @@ function startEnemy() {
         function closeShop() {
             document.getElementById("game-screen").classList.add("show");
             document.getElementById("game-screen").classList.remove("hide");
-            document.getElementById("container_shop").classList.add("hide");
+            document.getElementById("container_shop").classList.add("hidez");
             document.getElementById("container_shop").classList.remove("show");
             document.getElementById("shop_message").textContent = "";
             document.getElementById("weapon1").classList.remove("bought");
@@ -335,7 +335,7 @@ function startEnemy() {
             
             startPlayer();
         } else {
-            document.getElementById("shop_message").textContent = "Non hai abbastanza Monete!";
+            document.getElementById("shop_message").textContent = "Non hai abbastanza energia oscura!";
 
         }
 
@@ -353,7 +353,7 @@ function startEnemy() {
             
             startPlayer();
         } else {
-            document.getElementById("shop_message").textContent = "Non hai abbastanza Monete!";
+            document.getElementById("shop_message").textContent = "Non hai abbastanza energia oscura!";
 
         }
     }
@@ -369,7 +369,7 @@ function startEnemy() {
             document.getElementById("shield2").classList.remove("bought");
              startPlayer();
         } else {
-            document.getElementById("shop_message").textContent = "Non hai abbastanza soldi!";
+            document.getElementById("shop_message").textContent = "Non hai abbastanza energia oscura!";
 
         }
     }
@@ -385,7 +385,7 @@ function startEnemy() {
             document.getElementById("shield1").classList.remove("bought");
             startPlayer();
         } else {
-            document.getElementById("shop_message").textContent = "Non hai abbastanza soldi!";
+            document.getElementById("shop_message").textContent = "Non hai abbastanza energia oscura!";
 
         }
     }
