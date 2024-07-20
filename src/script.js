@@ -17,7 +17,7 @@ var player = {
     armor_durability:0
 }
 
-//Dichiarazione armi e armature acquistabili
+//Dichiarazione incantamenti
 var merch_weapons = [
     { name: "Lama Oscura", attack: 2, price: 10, durability: 6 },
     { name: "Ascia delle Tenebre", attack: 4, price: 14, durability: 8 },
@@ -30,8 +30,8 @@ var merch_weapons = [
 var merch_armor = [
     { name: "Scudo D'ombra", protection: 2, durability: 8, price: 5 },
     { name: "Armatura Oscura", protection: 3, durability: 7, price: 3 },
-    { name: "Armatura delle Fiamma Nera", protection: 4, durability: 10, price: 7 },
-    { name: "Armatura Oscura del  Vespro", protection: 10, durability: 15, price: 15 },
+    { name: "Armatura della Fiamma Oscura", protection: 4, durability: 10, price: 7 },
+    { name: "Armatura Oscura del Vespro", protection: 10, durability: 15, price: 15 },
     { name: "Scudo Torre Oscuro", protection: 7, durability: 10, price: 10 },
     { name: "Armatura d'Ombra", protection: 5, durability: 5, price: 8 },
 ]
@@ -43,7 +43,7 @@ var new_winner;
 var enemy = {
     name: ["Xordar ", "Zhondor ", "Gorroth ", "Holtahgar ", "Martakith ","Drakthar ", "Zorgan ", "Brakkhus'tar ", "Velgorth ", "Ignar ", "Thalor'kur ", "Xerxes'za ", "Ulthorg ", "Vorgarath ", "Krynn'tor ",
         "Artharion ", "Borath'thug ", "Lazari'kerh ", "Morkain'thur "],
-    title: ["il silente", "la furia del Velo", "benedetto dal Velo", "il Santo", "il senza pieta'", "alfiere di Shub'Zuray", "figlio di Velo", "la spada insaziabile", "l'impuro", "la follia errante", "il mai domato"]
+    title: ["il silente", "la furia del Velo", "benedetto dal Velo", "il Santo", "il senza pieta'", "alfiere di Shub'Zuray", "figlio del Velo", "la spada insaziabile", "l'impuro", "la follia errante", "il mai domato"]
 }
 
 function startGame() {
