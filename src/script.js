@@ -133,12 +133,12 @@ function startEnemy() {
 
     function enemyAttack() {//una possibilità su dieci di mancare il bersaglio
         if (Math.floor(Math.random() * 10) >= 9) {
-            document.getElementById("miss-message").textContent += "<strong>Riesci a schivare il colpo del mostro!</strong>"
+            document.getElementById("miss-message").textContent += "Riesci a schivare il colpo del mostro!"
         } else {
             clearMessages()
             let enemy_attack = parseInt(document.getElementById("enemy-attack").textContent);
             player.defense != 0 ? player.health -= Math.floor(enemy_attack - (enemy_attack * player.defense / 100)) : player.health -= enemy_attack;
-            player.health > 0 ? document.getElementById("hit-message").textContent = "<strong>Sei stato colpito!</strong> " : new_winner = playerDeath();
+            player.health > 0 ? document.getElementById("hit-message").textContent = "Sei stato colpito! " : new_winner = playerDeath();
             if (player.armor_durability > 0) {
                 player.armor_durability--;
                 if (player.armor_durability == 0) {
@@ -152,7 +152,7 @@ function startEnemy() {
 
     function enemyDeath() {
         document.getElementById("enemy-health").textContent = 0;
-        document.getElementById("miss-message").textContent = "<strong>Un mostro in meno a Gargantua!</strong> Continua la tua ronda..";
+        document.getElementById("miss-message").textContent = "Un mostro in meno a Gargantua! Continua la tua ronda..";
         let loot = getLoot();
         let xp = getXp();
         document.getElementById("loot-message").textContent = loot + xp;
@@ -168,19 +168,19 @@ function startEnemy() {
         setTimeout(function () {
             document.getElementById("game-screen").innerHTML += `<div id="death-screen">
         <h1>${player.name}, sei stato Sconfitto!</h1>
-        <p><strong>${new_winner}</strong> ti ha massacrato.. ma il tuo flebile cuore batte ancora...
+        <p><strong> ${new_winner} </strong> ti ha massacrato.. ma il tuo flebile cuore batte ancora...
         </p>
         <button class="button" onclick="restart()">Rinasci</button>
         </div>`
         }, 1000)
         return new_winner;
-
+        
 
     };
 
     function restart() {
         player = {
-            name: player.name,
+            name: 'Il Rinato',
             level: 1,
             max_health: 25,
             health: 1,
