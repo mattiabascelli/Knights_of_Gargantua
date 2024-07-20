@@ -44,10 +44,10 @@
                     <div class="col-sm-4">
                         <div class="battle" id="player">
                             <h1 id="player-name"></h1>
-                            <p><strong>Livello: <span id="player-level"></span></strong></p>
-                            <p><strong>Salute: <span id="player-health"></span></strong></p>
-                            <p><strong>Attacco: <span id="player-attack"></span></strong></p>
-                            <p><strong>Armatura: <span id="player-defense"></span></strong></p>
+                            <p><strong>Livello:</strong> <span id="player-level"></span></p>
+                            <p><strong>Punti Ferita:</strong> <span id="player-health"></span></p>
+                            <p><strong>Attacco:</strong> <span id="player-attack"></span></p>
+                            <p><strong>Armatura:</strong> <span id="player-defense"></span></p>
                             <p>Punti esperienza: <span id="player-xp"></span></p>
                             <p>Energia Oscura: <span id="player-money"></span></p>
                             <p>Pozioni: <span id="player-healing-potion"></span></p>
@@ -77,9 +77,9 @@
                             <p id="broken-weapon-message"></p>
 
                             <hr />
-                            <p>Livello: <span id="enemy-level"></span></p>
-                            <p>Salute: <span id="enemy-health"></span></p>
-                            <p>Attacco: <span id="enemy-attack"></span></p>
+                            <p><strong>Difficoltà:</strong> <span id="enemy-level"></span></p>
+                            <p><strong>Punti Ferita:</strong> <span id="enemy-health"></span></p>
+                            <p><strong>Potenza d'attacco:</strong> <span id="enemy-attack"></span></p>
 
                         </div>
 
@@ -87,12 +87,14 @@
                 </div>
             </div>
         
-        <!--Negozio-->
+        <!--Incantamento-->
         <div id="container_shop" class="hidez">
             <div class="row">
                 <div class="col-sm-2">
-                <div class="pg_umano"><img src="img/pg_umano.png" class="img-fluid" alt="Responsive image" /></div>
-            </div>
+                    <<img src="img/pg_umano.png" class="img-fluid" alt="Responsive image" /><br />
+                    <h3 id="money"><strong>Energia Oscura: <span id="money_shop"></span></strong></h3>
+                    <p id="shop_message"></p>
+                </div>
                 <div class="col-sm-4">
                     <div id="weapon1" class="shop weapon">
                         <h4 id="w1_name"></h4>
@@ -109,8 +111,7 @@
                             <button class="button" onclick="buyWeapon2()">Incanta</button>
                         </div>
                         <hr />
-                        <h3 id="money"><strong>Energia Oscura: <span id="money_shop"></span></strong></h3>
-                        <p id="shop_message"></p>
+                        
                     </div>
                 </div>
                 <div class="col-sm-4">
