@@ -1,4 +1,3 @@
-''
 //Dichiarazione valori iniziali giocatore
 var player = {
     level: 1,
@@ -17,7 +16,7 @@ var player = {
     armor_durability:0
 }
 
-//Dichiarazione incantamenti
+//Dichiarazione incantamenti [In precedenza Mercante di armi e armature]
 var merch_weapons = [
     { name: "Lama Oscura", attack: 2, price: 10, durability: 6 },
     { name: "Ascia delle Tenebre", attack: 4, price: 14, durability: 8 },
@@ -47,7 +46,7 @@ var enemy = {
 }
 
 function startGame() {
-    //Se non viene scelto il nome, viene assegnato "Cavaliere Errante"
+    //Se non viene scelto il nome, viene assegnato "Cacciatore Errante"
     document.getElementById("name").value == null || document.getElementById("name").value == "" ? player.name = "Cacciatore Errante" : player.name = document.getElementById("name").value;
     startPlayer();
     startEnemy();
@@ -57,7 +56,7 @@ function startGame() {
     document.getElementById("game-screen").classList.remove("hidez");
 }
     function startPlayer() {
-        //assegnazione dei valori all'eroe
+        //assegnazione dei valori iniziali del 
         document.getElementById("player-name").textContent = player.name;
         document.getElementById("player-level").textContent = player.level;
         document.getElementById("player-health").textContent = player.health + "/" + player.max_health;
@@ -211,7 +210,9 @@ function startEnemy() {
         let money = Math.floor(Math.random() * (10 * player.level) + 1);
         
         switch (random) {
+
             case 0:
+                //futuri sviluppi*
             case 1:
                 if ((player.money + money) > player.max_money) {
                     loot = "Hai accumulato troppa energia oscura! Hai ottenuto "
@@ -225,7 +226,7 @@ function startEnemy() {
             default:
 
                 if ((player.healing_potions + potions) > player.max_potions) {
-                    loot = "La tua sacca delle pozioni di salute è piena! Hai ottenuto "
+                    loot = "La tua sacca delle pozioni di salute e' piena! Hai ottenuto "
                     player.healing_potions = player.max_potions;
                 } else {
                     player.healing_potions += potions;
@@ -252,7 +253,7 @@ function startEnemy() {
             document.getElementById("hit-message").innerText = "Non hai più pozioni!"
         } else {
             if (player.health === player.max_health) {
-                document.getElementById("hit-message").innerText = "Non puoi curarti più del massimo!"
+                document.getElementById("hit-message").innerText = "Non puoi curarti piu' dei tuoi Punti Ferita Massimi!"
             } else {
                 player.health += 20;
                 player.healing_potions--;
