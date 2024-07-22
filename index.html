@@ -1,149 +1,171 @@
 ﻿<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-    <link rel="stylesheet" href="src/style.css" />
-    <meta name='viewport' content='width=device-width, initial-scale=1' />
-    <meta author="Mattia Bascelli" />
-    <meta charset="utf-8" />
-    <title>KNIGHTS OF GARGANTUA</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="icon" type="image/x-icon" href="img/logo_MB.ico">
+  <link rel="stylesheet" href="src/css/style.css" />
+  <meta name='viewport' content='width=device-width, initial-scale=1' />
+  <meta author="Mattia Bascelli" />
+  <meta charset="utf-8" />
+  <title>KNIGHTS OF GARGANTUA</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+  <link rel="icon" type="image/x-icon" href="/assets/img/logo_MB.ico">
 </head>
+
 <body>
-    <!--Inizio-->
-    
-        <div class="container" id="introduction" >
-            <div class="row t5">
-                <div class="col-sm-4">
-                    <div class="pg_umano"><img src="img/pg_umano.png" class="img-fluid" alt="Responsive image" /></div>
-                    <p>Illustrazioni by <a href="https://www.linkedin.com/in/mattiabascelli/" class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" target="_blank">Mattia Bascelli</a></p>
-                </div>
-                <div class="col-sm-4">
-                    <h1>Knights of Gargantua</h1>
-                    <p>
-                        Gargantua è un luogo inospitale, flagellato dal culto del velo. La corruzione ha infettato la carne, ed ora esseri immondi vagano per le vie dell'immensa città...
-                    </p>
-                    <p><strong>Knights of Gargantua</strong> è un semplice Gioco di Ruolo in <em>Javascript</em> in cui dovrete combattere orde di mostri. <br />Ogni volta che sconfiggerete un mostro ne apparirà uno nuovo. State attenti ai vostri Punti Ferita, e non dimenticatevi di incantare le vostre armi e la vostra armatura!</p>
-                    <div class='form-group'>
-                        <label for="name"><strong>Qual è il tuo nome Viandante?</strong></label>
-                        <input type="text" id="name" class='form-control' /><br />
-                        <button class="button" onclick="startGame()"><strong>COMBATTI!</strong></button>
-                    </div>
- 
-                </div>
-                </div>
-            </div>
-        
+  <!-- Page: Inizio -->
+  <div class="container" id="introduction">
+    <div class="row t5">
+      <div class="col-sm-4">
+        <div class="pg_umano">
+          <img
+            src="/assets/img/pg_umano.png"
+            class="img-fluid"
+            alt="Il tuo PG"
+          >
+        </div>
+        <p>
+          Illustrazioni by
+          <a
+            href="https://www.linkedin.com/in/mattiabascelli/"
+            class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"
+            target="_blank"
+          >
+            Mattia Bascelli
+          </a>
+        </p>
+      </div>
+      <div class="col-sm-4">
+        <h1>Knights of Gargantua</h1>
 
-        <!--Combattimento-->
-        <div id="game-screen" class="hidez">
-            
+        <p>
+          Gargantua è un luogo inospitale, flagellato dal culto del velo. La corruzione ha infettato la carne,
+          ed ora esseri immondi vagano per le vie dell'immensa città...
+        </p>
+        <p>
+          <strong>Knights of Gargantua</strong> è un semplice Gioco di Ruolo in <em>JavaScript</em> in cui
+          dovrete combattere orde di mostri. Ogni volta che sconfiggerete un mostro ne apparirà uno
+          nuovo. State attenti ai vostri Punti Ferita, e non dimenticatevi di incantare le vostre armi e la
+          vostra armatura!
+        </p>
 
-                <div class="row">
-                    <div class="col-sm-2">
-                        <div class="pg_umano"><img src="img/pg_umano.png" class="img-fluid" alt="Responsive image" /></div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="battle" id="player">
-                            <h1 id="player-name"></h1>
-                            <p><strong>Livello:</strong> <span id="player-level"></span></p>
-                            <p><strong>Punti Ferita:</strong> <span id="player-health"></span></p>
-                            <p><strong>Attacco:</strong> <span id="player-attack"></span></p>
-                            <p><strong>Armatura:</strong> <span id="player-defense"></span></p>
-                            <p>Punti esperienza: <span id="player-xp"></span></p>
-                            <p>Energia Oscura: <span id="player-money"></span></p>
-                            <p>Pozioni: <span id="player-healing-potion"></span></p>
-                            <p id="weapon-durability"></p>
-                            <p id="armor-durability"></p>
-                            <hr />
-                            <button class="button" onclick="attack()"><strong>ATTACCA</strong></button>
-                            <button class="potion button" onclick="healthUp()"><strong>CURATI</strong></button><br />
-                            <hr />
-                            <button class="button" onclick="shop()"><strong>INCANTAMENTO</strong></button><br />
-                            <p>Sconfiggendo i tuoi nemici puoi assorbire la loro <em>Energia Oscura</em>.
-                               Attingere all'Energia Oscura ti permette di creare degli incantamenti per renderti più forte.<br />
-                               Questi incantamenti hanno una durata limitata, e puoi avere solo un incantamento offensivo e uno difensivo attivo.
-                            </p>
-                        </div>
-
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="battle" id="enemy">
-                            <h1 id="enemy-name"></h1>
-                            <img src="" id="enemyimg" class="img-fluid" alt="Responsive image" />
-                            <p id="hit-message"></p>
-                            <p id="miss-message"></p>
-                            <p id=loot-message></p>
-                            <p id="level-up-message"></p>
-                            <p id="broken-weapon-message"></p>
-                            <p id="broken-weapon-message"></p>
-
-                            <hr />
-                            <p><strong>Difficoltà:</strong> <span id="enemy-level"></span></p>
-                            <p><strong>Punti Ferita:</strong> <span id="enemy-health"></span></p>
-                            <p><strong>Potenza d'attacco:</strong> <span id="enemy-attack"></span></p>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        
-        <!--Incantamento-->
-        <div id="container_shop" class="hidez">
-            <div class="row">
-                <div class="col-sm-2">
-                    <img src="img/pg_umano_enc.png" class="img-fluid" alt="Responsive image" /><br />
-                    <h3 id="money"><strong>Energia Oscura:</strong> <span id="money_shop"></span></h3>
-                    <p id="shop_message"></p>
-                </div>
-                <div class="col-sm-4">
-                    <div id="weapon1" class="shop weapon">
-                        <h4 id="w1_name"></h4>
-                        <p>Attacco: <span id="w1_attack"></span></p>
-                        <p>Durata: <span id="w1_durability"></span></p>
-                        <p>Energia Oscura: <span id="w1_price"></span></p>
-                        <button class="button" onclick="buyWeapon1()"><strong>Incanta</strong></button>
-                    </div>
-                        <br />
-                        <div id="weapon2" class="shop weapon">
-                            <h4 id="w2_name"></h4>
-                            <p>Attacco: <span id="w2_attack"></span></p>
-                            <p>Durata: <span id="w2_durability"></span></p>
-                            <p>Energia Oscura: <span id="w2_price"></span></p>
-                            <button class="button" onclick="buyWeapon2()"><strong>Incanta</strong></button>
-                        </div>
-                        <hr />
-                        
-                    
-                </div>
-                <div class="col-sm-4">
-                    <div id="shield1" class="shop shield">
-                        <h4 id="shield1_name"></h4>
-                        <p>Difesa: <span id="shield1_protection"></span></p>
-                        <p>Durata: <span id="shield1_durability"></span></p>
-                        <p>Energia Oscura: <span id="shield1_price"></span></p>
-                        <button class="button" onclick="buyShield1()"><strong>Incanta</strong></button>
-                    </div>
-                    <br />
-                    <div id="shield2" class="shop shield">
-                        <h4 id="shield2_name"></h4>
-                        <p>Difesa: <span id="shield2_protection"></span></p>
-                        <p>Durata: <span id="shield2_durability"></span></p>
-                        <p>Energia Oscura: <span id="shield2_price"></span></p>
-                        <button class="button" onclick="buyShield2()"><strong>Incanta</strong></button>
-                    </div>
-                    <hr />
-                    <button id="close-shop" class="button" onclick="closeShop()"><strong>Torna alla Ronda</strong></button>
-                    
-                </div>
-
-            </div>
-            </div>
+        <div class='form-group'>
+          <label for="name"><strong>Qual è il tuo nome, viandante?</strong></label>
+          <input type="text" id="name" class='form-control' /><br />
+          <button class="button" onclick="startGame()"><strong>COMBATTI!</strong></button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-        <script src="src/script.js"></script>
+  <!-- Page: Combattimento -->
+  <div id="game-screen" class="hidez">
+    <div class="row">
+      <div class="col-sm-2">
+        <div class="pg_umano"><img src="/assets/img/pg_umano.png" class="img-fluid" alt="Responsive image" /></div>
+      </div>
+      <div class="col-sm-4">
+        <div class="battle" id="player">
+          <h1 id="player-name"></h1>
+          <p><strong>Livello:</strong> <span id="player-level"></span></p>
+          <p><strong>Punti Ferita:</strong> <span id="player-health"></span></p>
+          <p><strong>Attacco:</strong> <span id="player-attack"></span></p>
+          <p><strong>Armatura:</strong> <span id="player-defense"></span></p>
+          <p>Punti esperienza: <span id="player-xp"></span></p>
+          <p>Energia Oscura: <span id="player-money"></span></p>
+          <p>Pozioni: <span id="player-healing-potion"></span></p>
+          <p id="weapon-durability"></p>
+          <p id="armor-durability"></p>
+          <hr />
+          <button class="button" onclick="attack()"><strong>ATTACCA</strong></button>
+          <button class="potion button" onclick="healthUp()"><strong>CURATI</strong></button><br />
+          <hr />
+          <button class="button" onclick="shop()"><strong>INCANTAMENTO</strong></button><br />
+          <p>Sconfiggendo i tuoi nemici puoi assorbire la loro <em>Energia Oscura</em>.
+            Attingere all'Energia Oscura ti permette di creare degli incantamenti per renderti più
+            forte.<br />
+            Questi incantamenti hanno una durata limitata, e puoi avere solo un incantamento offensivo e uno
+            difensivo attivo.
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="battle" id="enemy">
+          <h1 id="enemy-name"></h1>
+          <img src="" id="enemyimg" class="img-fluid" alt="Responsive image" />
+          <p id="hit-message"></p>
+          <p id="miss-message"></p>
+          <p id=loot-message></p>
+          <p id="level-up-message"></p>
+          <p id="broken-weapon-message"></p>
+          <p id="broken-weapon-message"></p>
+          <hr />
+          <p><strong>Difficoltà:</strong> <span id="enemy-level"></span></p>
+          <p><strong>Punti Ferita:</strong> <span id="enemy-health"></span></p>
+          <p><strong>Potenza d'attacco:</strong> <span id="enemy-attack"></span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page: Shop -->
+  <div id="container_shop" class="hidez">
+    <div class="row">
+      <div class="col-sm-2">
+        <img src="/assets/img/pg_umano_enc.png" class="img-fluid" alt="Responsive image" /><br />
+        <h3 id="money"><strong>Energia Oscura:</strong> <span id="money_shop"></span></h3>
+        <p id="shop_message"></p>
+      </div>
+      <div class="col-sm-4">
+        <div id="weapon1" class="shop weapon">
+          <h4 id="w1_name"></h4>
+          <p>Attacco: <span id="w1_attack"></span></p>
+          <p>Durata: <span id="w1_durability"></span></p>
+          <p>Energia Oscura: <span id="w1_price"></span></p>
+          <button class="button" onclick="buyWeapon1()"><strong>Incanta</strong></button>
+        </div>
+        <br />
+        <div id="weapon2" class="shop weapon">
+          <h4 id="w2_name"></h4>
+          <p>Attacco: <span id="w2_attack"></span></p>
+          <p>Durata: <span id="w2_durability"></span></p>
+          <p>Energia Oscura: <span id="w2_price"></span></p>
+          <button class="button" onclick="buyWeapon2()"><strong>Incanta</strong></button>
+        </div>
+        <hr />
+      </div>
+      <div class="col-sm-4">
+        <div id="shield1" class="shop shield">
+          <h4 id="shield1_name"></h4>
+          <p>Difesa: <span id="shield1_protection"></span></p>
+          <p>Durata: <span id="shield1_durability"></span></p>
+          <p>Energia Oscura: <span id="shield1_price"></span></p>
+          <button class="button" onclick="buyShield1()"><strong>Incanta</strong></button>
+        </div>
+        <br />
+        <div id="shield2" class="shop shield">
+          <h4 id="shield2_name"></h4>
+          <p>Difesa: <span id="shield2_protection"></span></p>
+          <p>Durata: <span id="shield2_durability"></span></p>
+          <p>Energia Oscura: <span id="shield2_price"></span></p>
+          <button class="button" onclick="buyShield2()">
+            <strong>Incanta</strong>
+          </button>
+        </div>
+        <hr />
+        <button id="close-shop" class="button" onclick="closeShop()">
+          <strong>Torna alla Ronda</strong>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="src/js/script.js"></script>
 </body>
+
 </html>
