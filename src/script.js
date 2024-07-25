@@ -75,7 +75,7 @@ function startGame() {
         } else {
             document.getElementById("weapon-durability").textContent = "";
         }
-        //Quando la vita dell'eroe è sotto un terzo dei PF lo scritta diventa rossa
+        //Quando la vita dell'eroe ï¿½ sotto un terzo dei PF lo scritta diventa rossa
         if (player.health < (player.max_health / 3)) {
             document.getElementById("player-health").style.color = "red";
             
@@ -88,7 +88,7 @@ function startGame() {
 
 function startEnemy() {
         //randomizzazione dell'immagine del mostro
-        const MAX = 6;
+        const MAX = 7;
         var numz = Math.trunc(MAX * Math.random()) + 1;
         //assegnazione dei valori al nemico
         document.getElementById("enemy").classList.remove("hide")
@@ -105,7 +105,7 @@ function startEnemy() {
         if (parseInt(document.getElementById("enemy-health").textContent) <= 0) {
             document.getElementById("hit-message").textContent = "Hai massacrato il tuo avversario!"
         } else {
-            if (Math.floor(Math.random() * 10) >= 9) {//una possibilità su dieci di mancare il bersaglio
+            if (Math.floor(Math.random() * 10) >= 9) {//una possibilitï¿½ su dieci di mancare il bersaglio
                 //ad ogni attacco il valore della salute viene estrapolato dalla scheda per non intaccare quello nell'array
                 enemyAttack()
                 document.getElementById("miss-message").textContent = "Bersaglio mancato!"
@@ -125,12 +125,12 @@ function startEnemy() {
 
             }
         }
-        //a ogni attacco si aggiornano i valori
+        //ad ogni attacco si aggiornano i valori
         startPlayer();
     };
 
 
-    function enemyAttack() {//una possibilità su dieci di mancare il bersaglio
+    function enemyAttack() {/ /una possibilitï¿½ su dieci di mancare il bersaglio
         if (Math.floor(Math.random() * 10) >= 9) {
             document.getElementById("miss-message").textContent += "Riesci a schivare il colpo del mostro!"
         } else {
@@ -250,7 +250,7 @@ function startEnemy() {
     function healthUp() {
         //Vengono restituiti 20 punti salute
         if (player.healing_potions <= 0) {
-            document.getElementById("hit-message").innerText = "Non hai più pozioni!"
+            document.getElementById("hit-message").innerText = "Non hai piï¿½ pozioni!"
         } else {
             if (player.health === player.max_health) {
                 document.getElementById("hit-message").innerText = "Non puoi curarti piu' dei tuoi Punti Ferita Massimi!"
