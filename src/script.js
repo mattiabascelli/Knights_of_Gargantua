@@ -130,7 +130,7 @@ function startEnemy() {
     };
 
 
-    function enemyAttack() {/ /una possibilit� su dieci di mancare il bersaglio
+    function enemyAttack() {//una possibilita su dieci di mancare il bersaglio
         if (Math.floor(Math.random() * 10) >= 9) {
             document.getElementById("miss-message").textContent += "Riesci a schivare il colpo del mostro!"
         } else {
