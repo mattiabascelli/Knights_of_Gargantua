@@ -16,6 +16,8 @@ var player = {
     armor_durability:0
 }
 
+var numz;
+
 //Dichiarazione incantamenti [In precedenza Mercante di armi e armature]
 var merch_weapons = [
     { name: "Lama Oscura", attack: 2, price: 10, durability: 6 },
@@ -78,9 +80,11 @@ function startGame() {
         //Quando la vita dell'eroe � sotto un terzo dei PF lo scritta diventa rossa
         if (player.health < (player.max_health / 3)) {
             document.getElementById("player-health").style.color = "red";
+            pg_umano.src="img/pg_umano_ferito.png"
             
         } else {
             document.getElementById("player-health").style.color = "black";
+            pg_umano.src = "img/pg_umano.png"
             
         }
 
@@ -89,7 +93,7 @@ function startGame() {
 function startEnemy() {
         //randomizzazione dell'immagine del mostro
         const MAX = 7;
-        var numz = Math.trunc(MAX * Math.random()) + 1;
+        numz = Math.trunc(MAX * Math.random()) + 1;
         //assegnazione dei valori al nemico
         document.getElementById("enemy").classList.remove("hide")
         document.getElementById("enemy-name").textContent = enemy.name[Math.floor(Math.random() * enemy.name.length)] + enemy.title[Math.floor(Math.random() * enemy.title.length)];
@@ -99,9 +103,18 @@ function startEnemy() {
         enemyimg.src = "img/mostro" + numz + ".png";
         clearMessages();
 
-    };
+};
 
-    function attack() {
+function sangue() {
+    enemyimg.src = "img/mostro" + numz + "_sangue.png";
+    setTimeout(noSangue, 500);
+}
+function noSangue() {
+    enemyimg.src = "img/mostro" + numz + ".png";
+}
+
+function attack() {
+
         if (parseInt(document.getElementById("enemy-health").textContent) <= 0) {
             document.getElementById("hit-message").textContent = "Hai massacrato il tuo avversario!"
         } else {
@@ -121,6 +134,7 @@ function startEnemy() {
                     }
                 }
                 document.getElementById("enemy-health").textContent = enemy_health;
+                sangue();
                 enemy_health > 0 ? enemyAttack() : enemyDeath();
 
             }
@@ -250,7 +264,7 @@ function startEnemy() {
     function healthUp() {
         //Vengono restituiti 20 punti salute
         if (player.healing_potions <= 0) {
-            document.getElementById("hit-message").innerText = "Non hai pi� pozioni!"
+            document.getElementById("hit-message").innerText = "Non hai piu' pozioni!"
         } else {
             if (player.health === player.max_health) {
                 document.getElementById("hit-message").innerText = "Non puoi curarti piu' dei tuoi Punti Ferita Massimi!"
