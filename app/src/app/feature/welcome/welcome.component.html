@@ -1,0 +1,35 @@
+<h1>Knights of Gargantua</h1>
+
+<p>
+  Gargantua is a dangerous city, flailed  by the <em>Cult of the Veil</em>.
+  Corruption has rotten the flesh and now horrifying beings roam the streets of
+  the city...
+</p>
+
+<p>
+  Knights of Gargantua is a simple browser game, letting you fight endlessly
+  against hordes of random monsters. Each time you defeat a monster, a new one
+  appears. Monster stats are randomly calculated based on your level.
+</p>
+
+<p>
+  Mind your Health Points, don't forget to enchant your weapons and don't forget
+  to survive!
+</p>
+
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+  <!-- Username -->
+  <div class="form-control">
+    <label for="username">
+      What's your name, Wanderer?
+    </label>
+    <input type="text" formControlName="username">
+  </div>
+
+  <!-- Submit -->
+  <div class="form-control">
+    <button type="submit">Fight!</button>
+  </div>
+
+</form>
