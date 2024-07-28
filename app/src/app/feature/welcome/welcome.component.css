@@ -1,0 +1,60 @@
+.form-controls.--centered,
+.form-controls.--centered .form-control {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.form-control label {
+  font-weight: bold;
+}
+
+.error-message {
+  color: rgb(236, 53, 53);
+  font-style: italic;
+}
+
+.form-controls.--large .form-control label {
+  font-size: 1.25rem;
+}
+
+.form-controls.--large .form-control input[type="text"] {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  border-radius: 0.5rem;
+  border: 2px solid rgba(0, 0, 0, 0.33);
+}
+
+.form-controls.--large .form-control button {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  border-radius: 0.5rem;
+}
+
+.button {
+  --_size: 1rem;
+
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: bold;
+  min-width: 150px;
+  padding: calc(0.75 * var(--_size)) calc(1.2 * var(--_size));
+  font-size: calc(1.15 * var(--_size));
+  border-radius: calc(0.5 * var(--_size));
+  transition: 0.15s all ease-out;
+  background-color: rgb(48, 48, 48);
+  border: 0;
+  color: white;
+  cursor: pointer;
+}
+
+.button[disabled],
+.button:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.button:hover {
+  background-color: rgb(64, 64, 64);
+}

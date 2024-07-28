@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 
 import { StoreService } from '@/core/store';
+import { GameFlowService } from '@/core/game';
 
 @Component({
-  selector: 'app-welcome',
+  selector: 'app-feature-welcome',
   standalone: true,
   imports: [
     ReactiveFormsModule,
@@ -13,14 +13,18 @@ import { StoreService } from '@/core/store';
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.css',
 })
-export class WelcomeComponent {
+export class WelcomeFeatureComponent {
 
-  private router = inject(Router);
+  private gameFlow = inject(GameFlowService);
   private store = inject(StoreService);
 
   userForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
   });
+
+  get fUsername(): FormControl {
+    return this.userForm.get('username')! as FormControl;
+  }
 
   onSubmit() {
     if (this.userForm.invalid) {
@@ -29,7 +33,7 @@ export class WelcomeComponent {
 
     const username = this.userForm.value.username!;
     this.store.player.name.set(username);
-    this.store.ui.notifications.success(`Welcome, ${username}`);
-    this.router.navigate(['/fight']);
+    this.store.player.initialized.set(true);
+    this.gameFlow.nextEvent();
   }
 }

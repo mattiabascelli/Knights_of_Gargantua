@@ -1,21 +1,57 @@
 import { Routes } from '@angular/router';
 
-import { WelcomeComponent } from './feature/welcome';
-import { FightComponent, isPlayerInitialized } from './feature/fight';
+import { ChallengeFeatureComponent } from './feature/challenge';
+import { EnemyFeatureComponent } from './feature/enemy';
+import { EnergySourceFeatureComponent } from './feature/energy-source';
+import { GatherFeatureComponent } from './feature/gather';
+import { NpcFeatureComponent } from './feature/npc';
+import { RestFeatureComponent } from './feature/rest';
+import { WelcomeFeatureComponent } from './feature/welcome';
+import { DEFAULT_ROUTE, ROUTE } from './core/routes';
+import { isPlayerInitialized } from './core/guards';
 
 export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'welcome',
+    redirectTo: DEFAULT_ROUTE,
   },
   {
-    path: 'welcome',
-    component: WelcomeComponent,
+    path: ROUTE.WELCOME,
+    component: WelcomeFeatureComponent,
   },
   {
-    path: 'fight',
-    component: FightComponent,
+    path: ROUTE.CHALLENGE,
     canActivate: [isPlayerInitialized],
+    component: ChallengeFeatureComponent,
+  },
+  {
+    path: ROUTE.ENEMY,
+    canActivate: [isPlayerInitialized],
+    component: EnemyFeatureComponent,
+  },
+  {
+    path: ROUTE.ENERGY_SORCE,
+    canActivate: [isPlayerInitialized],
+    component: EnergySourceFeatureComponent,
+  },
+  {
+    path: ROUTE.GATHER,
+    canActivate: [isPlayerInitialized],
+    component: GatherFeatureComponent,
+  },
+  {
+    path: ROUTE.NPC,
+    canActivate: [isPlayerInitialized],
+    component: NpcFeatureComponent,
+  },
+  {
+    path: ROUTE.REST,
+    canActivate: [isPlayerInitialized],
+    component: RestFeatureComponent,
+  },
+  {
+    path: '**',
+    component: WelcomeFeatureComponent,
   },
 ];

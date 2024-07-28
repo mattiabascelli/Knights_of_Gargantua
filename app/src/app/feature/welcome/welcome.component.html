@@ -17,19 +17,34 @@
   to survive!
 </p>
 
-<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-
+<form
+  class="form-controls --centered --large"
+  [formGroup]="userForm"
+  (ngSubmit)="onSubmit()"
+>
   <!-- Username -->
   <div class="form-control">
     <label for="username">
       What's your name, Wanderer?
     </label>
-    <input type="text" formControlName="username">
+
+    <input
+      class="input-wide"
+      type="text"
+      formControlName="username"
+      placeholder="Enter your name here..."
+    >
+
+    @if (fUsername.dirty && fUsername.hasError('required')) {
+      <span class="error-message">Your name is required.</span>
+    }
   </div>
 
   <!-- Submit -->
   <div class="form-control">
-    <button type="submit">Fight!</button>
+    <button class="button --primary" type="submit" [disabled]="userForm.invalid">
+      Start
+    </button>
   </div>
 
 </form>
