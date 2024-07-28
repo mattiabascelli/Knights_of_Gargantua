@@ -1,0 +1,16 @@
+.app {
+  --space: 0.75rem;
+
+  border-radius: calc(0.5 * var(--space));
+  max-width: min(calc(100vw - 2 * var(--space)), 1024px);
+  margin: var(--space) auto;
+  padding: var(--space);
+  background-color: rgba(255,255,255,0.25);
+  box-shadow: 0 0 100px 0 rgba(0,0,0,0.25);
+}
+
+@media screen and (min-width: 1024px) {
+  .app {
+    --space: 1rem;
+  }
+}
