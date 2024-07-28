@@ -18,6 +18,16 @@ export class WelcomeFeatureComponent {
   private gameFlow = inject(GameFlowService);
   private store = inject(StoreService);
 
+  // TODO: Remove
+  ngOnInit() {
+    setTimeout(() => {
+      const username = 'Player Name';
+      this.store.player.name.set(username);
+      this.store.player.initialized.set(true);
+      this.gameFlow.nextEvent(42); // Enemy: easy
+    }, 100);
+  }
+
   userForm = new FormGroup({
     username: new FormControl('', [Validators.required]),
   });

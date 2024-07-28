@@ -10,9 +10,9 @@ export class GameFlowService {
 
   event = signal<GameEvent | null>(null);
 
-  nextEvent() {
-    const gameEvent = generateGameEvent();
+  nextEvent(seed?: number) {
+    const gameEvent = generateGameEvent(seed);
     this.event.set(gameEvent);
-    console.log('GameFlowService.nextEvent()', gameEvent);
+    console.log('GameFlowService.nextEvent()', gameEvent); // TODO: Remove
   }
 }
