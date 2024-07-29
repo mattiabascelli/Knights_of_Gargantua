@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, viewChild } from '@angular/core';
 
 import { FightScenarioComponent } from '@/common/components/fight-scenario';
 
@@ -13,8 +13,11 @@ import { FightScenarioComponent } from '@/common/components/fight-scenario';
 })
 export class EnemyFeatureComponent {
 
+  fightScenario = viewChild.required(FightScenarioComponent);
+
   onAttackAction() {
     console.log('onAttackAction');
+    this.fightScenario().animateEnemyHit();
   }
 
   onHealedAction() {
