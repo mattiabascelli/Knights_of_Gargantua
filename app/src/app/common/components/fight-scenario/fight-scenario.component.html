@@ -24,12 +24,17 @@
     </div>
   </div>
   <div class="enemy__image">
-    <img src="https://placehold.co/300x200" atl="Enemy name">
+    <img
+      src="/img/enemy-1.png"
+      width="250"
+      height="350"
+      alt="Enemy name"
+    >
   </div>
 </div>
 
 <div class="player">
-  <div class="player__indicator">
+  <div class="player__info">
     <app-fighter-indicator
       name="Player name"
       [level]="3"
@@ -38,12 +43,18 @@
     />
   </div>
   <div class="player__image">
-    <img src="https://placehold.co/300x200" atl="Player name">
+    <!-- <img src="https://placehold.co/300x200" atl="Player name"> -->
+    <img
+      src="/img/human.png"
+      width="130"
+      height="200"
+      alt="Player name"
+    >
   </div>
   <div class="player__actions">
-    <button>Attack</button>
-    <button>Heal</button>
-    <button>Enchant</button>
-    <button>Use Scroll</button>
+    <button class="button --primary" (click)="attacked.emit()">Attack</button>
+    <button class="button --outline" (click)="healed.emit()">Heal</button>
+    <button class="button --outline" (click)="enchanted.emit()">Enchant</button>
+    <button class="button --outline" (click)="usedScroll.emit()">Use Scroll</button>
   </div>
 </div>

@@ -1,1 +1,6 @@
-<app-fight-scenario />
+<app-fight-scenario
+  (attacked)="onAttackAction()"
+  (healed)="onHealedAction()"
+  (enchanted)="onEnchantedAction()"
+  (usedScroll)="onUsedScrollAction()"
+/>

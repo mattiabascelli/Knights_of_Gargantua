@@ -7,10 +7,9 @@ export type CharacterStat = {
 };
 
 export const HEALTH_BAR_COLOR = {
-  BACKGROUND: '#ccc', // TODO: Choose colors, maybe reference CSS vars
-  LOW: 'red', // TODO: Choose colors, maybe reference CSS vars
-  MID: 'orange', // TODO: Choose colors, maybe reference CSS vars
-  HIGH: 'green', // TODO: Choose colors, maybe reference CSS vars
+  LOW: '#d42e08', // TODO: Choose colors, maybe reference CSS vars
+  MID: '#ffac26', // TODO: Choose colors, maybe reference CSS vars
+  HIGH: '#5fb519', // TODO: Choose colors, maybe reference CSS vars
 } as const;
 
 export type HealthBarColor = typeof HEALTH_BAR_COLOR[

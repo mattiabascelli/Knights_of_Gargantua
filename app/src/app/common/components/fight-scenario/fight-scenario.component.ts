@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, output } from '@angular/core';
 
 import { FighterIndicatorComponent } from "./fighter-indicator/fighter-indicator.component";
 
@@ -12,5 +12,8 @@ import { FighterIndicatorComponent } from "./fighter-indicator/fighter-indicator
   styleUrl: './fight-scenario.component.css'
 })
 export class FightScenarioComponent {
-
+  attacked = output();
+  healed = output();
+  enchanted = output();
+  usedScroll = output();
 }

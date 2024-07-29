@@ -1,9 +1,9 @@
 :host {
   --_health-bar-size: 1;
-  --_health-bar-color: green;
-  --_health-bar-width: min(300px, 95vw);
-  --_health-bar-height: 0.66rem;
-  --_health-bar-background: rgba(0,0,0,0.2);
+  --_health-bar-color: rgb(89, 247, 89);
+  --_health-bar-width: min(350px, 95vw);
+  --_health-bar-height: 1rem;
+  --_health-bar-background: rgba(0,0,0,0.33);
 
   display: flex;
   flex-direction: column;
@@ -21,6 +21,7 @@
   height: var(--_health-bar-height);
   background-color: var(--_health-bar-background);
   position: relative;
+  border: 2px solid black;
 }
 
 .health-bar {
@@ -28,13 +29,15 @@
   inset: 0;
   transform-origin: left;
   transform: scaleX(var(--_health-bar-size));
-  transition: 0.15s transform ease-in-out;
+  transition: 0.15s all ease-in-out;
   background-color: var(--_health-bar-color);
+  border-right: 2px solid black;
 }
 
 .sub-info {
+  font-family: monospace;
   display: flex;
   justify-content: space-between;
   padding: 0 0.25rem;
-  font-size: 0.9em;
+  font-size: 1.1em;
 }

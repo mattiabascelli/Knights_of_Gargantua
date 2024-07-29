@@ -13,4 +13,19 @@ import { FightScenarioComponent } from '@/common/components/fight-scenario';
 })
 export class EnemyFeatureComponent {
 
+  onAttackAction() {
+    console.log('onAttackAction');
+  }
+
+  onHealedAction() {
+    console.log('onHealedAction');
+  }
+
+  onEnchantedAction() {
+    console.log('onEnchantedAction');
+  }
+
+  onUsedScrollAction() {
+    console.log('onUsedScrollAction');
+  }
 }
