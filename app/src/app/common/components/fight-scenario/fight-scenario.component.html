@@ -1,0 +1,49 @@
+<div class="enemy">
+  <div class="enemy__info">
+    <app-fighter-indicator
+      name="Enemy name - Enemy Title"
+      [level]="2"
+      [health]="12"
+      [healthCap]="14"
+    />
+    <div class="enemy__stats">
+      <ul class="stats">
+        <li>
+          <strong>Armor</strong>
+          <span class="stat">002</span>
+        </li>
+        <li>
+          <strong>Damage</strong>
+          <span class="stat">004</span>
+        </li>
+        <li>
+          <strong>Some other stat</strong>
+          <span class="stat">123</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="enemy__image">
+    <img src="https://placehold.co/300x200" atl="Enemy name">
+  </div>
+</div>
+
+<div class="player">
+  <div class="player__indicator">
+    <app-fighter-indicator
+      name="Player name"
+      [level]="3"
+      [health]="5"
+      [healthCap]="21"
+    />
+  </div>
+  <div class="player__image">
+    <img src="https://placehold.co/300x200" atl="Player name">
+  </div>
+  <div class="player__actions">
+    <button>Attack</button>
+    <button>Heal</button>
+    <button>Enchant</button>
+    <button>Use Scroll</button>
+  </div>
+</div>
