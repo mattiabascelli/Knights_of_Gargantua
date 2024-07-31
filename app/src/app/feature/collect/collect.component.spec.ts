@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GatherComponent } from './gather.component';
+import { CollectFeatureComponent } from './collect.component';
 
-describe('GatherComponent', () => {
-  let component: GatherComponent;
-  let fixture: ComponentFixture<GatherComponent>;
+describe('CollectFeatureComponent', () => {
+  let component: CollectFeatureComponent;
+  let fixture: ComponentFixture<CollectFeatureComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GatherComponent]
+      imports: [CollectFeatureComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(GatherComponent);
+    fixture = TestBed.createComponent(CollectFeatureComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

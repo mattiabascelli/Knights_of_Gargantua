@@ -3,7 +3,7 @@ import { Routes } from '@angular/router';
 import { ChallengeFeatureComponent } from './feature/challenge';
 import { EnemyFeatureComponent } from './feature/enemy';
 import { EnergySourceFeatureComponent } from './feature/energy-source';
-import { GatherFeatureComponent } from './feature/gather';
+import { CollectFeatureComponent } from './feature/collect';
 import { NpcFeatureComponent } from './feature/npc';
 import { RestFeatureComponent } from './feature/rest';
 import { WelcomeFeatureComponent } from './feature/welcome';
@@ -36,9 +36,9 @@ export const routes: Routes = [
     component: EnergySourceFeatureComponent,
   },
   {
-    path: ROUTE.GATHER,
+    path: ROUTE.COLLECT,
     canActivate: [isPlayerInitialized],
-    component: GatherFeatureComponent,
+    component: CollectFeatureComponent,
   },
   {
     path: ROUTE.NPC,
