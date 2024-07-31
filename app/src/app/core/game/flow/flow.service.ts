@@ -1,9 +1,8 @@
 import { Injectable, signal } from '@angular/core';
 
-import { generateGameEvent } from './events/generate-game-event';
-import { GameEvent } from './events/types';
 import { ActionsQueue } from '@/common/queue/queue';
 import { ActionsQueueItem } from '@/common/queue/types';
+import { GameEvent, generateGameEvent } from '../events';
 
 @Injectable({
   providedIn: 'root'

@@ -1,0 +1,1 @@
+- [ ] Debounce all actions during animations

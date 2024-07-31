@@ -20,11 +20,11 @@
   height: var(--_height);
 }
 
-:host.--hitting .idle {
+:host.--defending .idle-stance {
   opacity: 0;
 }
 
-:host.--hitting .hit {
+:host.--defending .defending-stance {
   opacity: 1;
   animation-name: shake;
   animation-duration: 0.066s;
@@ -33,7 +33,7 @@
   animation-iteration-count: 3;
 }
 
-.hit {
+.defending-stance {
   inset: 0;
   position: absolute;
   z-index: 1;

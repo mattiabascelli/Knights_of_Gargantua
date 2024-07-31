@@ -1,6 +1,7 @@
 import { Component, computed, HostBinding, input, signal } from '@angular/core';
 
-const HIT_ANIMATION_DURATION = 300; // 0.3 seconds
+import { DEFAULT_ANIMATION_DURATION } from '@/core/game/constants';
+import { wait } from '@/common/functions';
 
 @Component({
   selector: 'app-enemy-image',
@@ -13,12 +14,14 @@ const HIT_ANIMATION_DURATION = 300; // 0.3 seconds
 export class EnemyImageComponent {
 
   idlePath = input.required<string>();
-  hitPath = input.required<string>();
+  defendingPath = input.required<string>();
   alt = input<string>();
   width = input<string>('250');
   height = input<string>('350');
+  animationDuration = input(DEFAULT_ANIMATION_DURATION);
 
-  hitting = signal(false);
+  attacking = signal(false);
+  defending = signal(false);
   widthNumeric = computed(() => this.stripPixels(this.width()));
   heightNumeric = computed(() => this.stripPixels(this.height()));
 
@@ -32,15 +35,28 @@ export class EnemyImageComponent {
     return this.addPixels(this.height());
   }
 
-  @HostBinding('class.--hitting')
-  get cssHitting() {
-    return this.hitting();
+  @HostBinding('class.--attacking')
+  get cssAttacking() {
+    return this.attacking();
+  }
+
+  @HostBinding('class.--defending')
+  get cssDefending() {
+    return this.defending();
   }
 
   // @publicApi
-  hit() {
-    this.hitting.set(true);
-    setTimeout(() => this.hitting.set(false), HIT_ANIMATION_DURATION);
+  async attack(): Promise<void> {
+    this.attacking.set(true);
+    await wait(this.animationDuration());
+    this.attacking.set(false);
+  }
+
+  // @publicApi
+  async defend(): Promise<void> {
+    this.defending.set(true);
+    await wait(this.animationDuration());
+    this.defending.set(false);
   }
 
   private addPixels(measure: string): string {

@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { StoreService } from '@/core/store';
-import { GameFlowService } from '@/core/game';
+import { GameFlowService } from '@/core/game/flow';
 
 @Component({
   selector: 'app-feature-welcome',

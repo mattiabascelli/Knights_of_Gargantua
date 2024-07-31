@@ -1,8 +1,9 @@
 import { Component, effect, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 
-import { GameFlowService, getRouteByGameEvent } from './core/game';
 import { StoreService } from './core/store';
+import { getRouteByGameEvent } from './core/game/events';
+import { GameFlowService } from './core/game/flow';
 
 @Component({
   selector: 'app-root',

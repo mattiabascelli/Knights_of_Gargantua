@@ -1,7 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 
-import { PlayerStoreFeatureService } from './player/player.service';
-import { UiStoreFeatureService } from './ui/ui.service';
+import { UiStoreFeatureService } from './ui';
+import { PlayerStoreFeatureService } from './player';
+import { EnemyStoreFeatureService } from './enemy';
 
 @Injectable({
   providedIn: 'root'
@@ -9,4 +10,5 @@ import { UiStoreFeatureService } from './ui/ui.service';
 export class StoreService {
   ui = inject(UiStoreFeatureService);
   player = inject(PlayerStoreFeatureService);
+  enemy = inject(EnemyStoreFeatureService);
 }
