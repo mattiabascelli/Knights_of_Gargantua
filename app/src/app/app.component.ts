@@ -4,6 +4,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { StoreService } from './core/store';
 import { getRouteByGameEvent } from './core/game/events';
 import { GameFlowService } from './core/game/flow';
+import { gamefluxExample } from './common/gameflux/example';
 
 @Component({
   selector: 'app-root',

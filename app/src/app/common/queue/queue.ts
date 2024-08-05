@@ -13,7 +13,7 @@ export class PromisesQueue {
   private afterEach: PromisesQueueConfig['afterEach'];
 
   constructor(config?: PromisesQueueConfig) {
-    this.autoDequeue = !!config?.autoDequeue || false;
+    this.autoDequeue = !!config?.autoDequeue || true;
     this.beforeEach = config?.beforeEach ?? undefined;
     this.afterEach = config?.afterEach ?? undefined;
   }
