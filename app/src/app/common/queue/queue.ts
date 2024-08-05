@@ -1,45 +1,54 @@
-import { ActionsQueueItem, ActionsQueueConfig, ActionsQueueState } from './types';
+import { mapToPromisesQueueItem } from './functions';
+import { PromisesQueueItem, PromisesQueueConfig, PromisesQueueState, InputPromisesQueueItem } from './types';
 
-export class ActionsQueue {
+export class PromisesQueue {
 
   // State
   private isPending = false;
-  private queue: ActionsQueueItem[] = [];
+  private queue: PromisesQueueItem[] = [];
 
   // Config
   private autoDequeue = true;
-  private beforeEach: ActionsQueueConfig['beforeEach'];
-  private afterEach: ActionsQueueConfig['afterEach'];
+  private beforeEach: PromisesQueueConfig['beforeEach'];
+  private afterEach: PromisesQueueConfig['afterEach'];
 
-  constructor(config?: ActionsQueueConfig) {
+  constructor(config?: PromisesQueueConfig) {
     this.autoDequeue = !!config?.autoDequeue || false;
     this.beforeEach = config?.beforeEach ?? undefined;
     this.afterEach = config?.afterEach ?? undefined;
   }
 
-  add(action: ActionsQueueItem): Promise<ActionsQueueState> {
+  add(
+    actionOrMessage: InputPromisesQueueItem | InputPromisesQueueItem['message'],
+    inputFn?: InputPromisesQueueItem['fn'],
+  ): Promise<PromisesQueueState> {
+    const action = mapToPromisesQueueItem(actionOrMessage, inputFn);
     this.queue.push(action);
 
     if (this.autoDequeue) {
       return this._dequeueAll();
     }
 
-    return Promise.resolve(ActionsQueueState.Done);
+    return Promise.resolve(PromisesQueueState.Done);
   }
 
-  addDebounced(action: ActionsQueueItem): Promise<ActionsQueueState> {
+  addDebounced(
+    actionOrMessage: InputPromisesQueueItem | InputPromisesQueueItem['message'],
+    inputFn?: InputPromisesQueueItem['fn'],
+  ): Promise<PromisesQueueState> {
     if (this.isPending) {
-      return Promise.resolve(ActionsQueueState.Pending);
+      return Promise.resolve(PromisesQueueState.Pending);
     }
+    const action = mapToPromisesQueueItem(actionOrMessage, inputFn);
     return this.add(action);
   }
 
-  async dequeueOne(): Promise<ActionsQueueState> {
+  async dequeueOne(): Promise<PromisesQueueState> {
     this.checkManualDequeueing();
     return this._dequeueOne();
   }
 
-  async dequeueAll(): Promise<ActionsQueueState> {
+  async dequeueAll(): Promise<PromisesQueueState> {
     this.checkManualDequeueing();
     return this._dequeueAll();
   }
@@ -52,13 +61,13 @@ export class ActionsQueue {
     }
   }
 
-  private async _dequeueOne(): Promise<ActionsQueueState> {
+  private async _dequeueOne(): Promise<PromisesQueueState> {
     if (this.isPending) {
-      return Promise.resolve(ActionsQueueState.Pending);
+      return Promise.resolve(PromisesQueueState.Pending);
     }
 
     if (this.queue.length === 0) {
-      return Promise.resolve(ActionsQueueState.Empty);
+      return Promise.resolve(PromisesQueueState.Empty);
     }
 
     this.isPending = true;
@@ -66,17 +75,17 @@ export class ActionsQueue {
     await this.resolveAction(action);
     this.isPending = false;
 
-    return ActionsQueueState.Done;
+    return PromisesQueueState.Done;
   }
 
-  private async _dequeueAll(): Promise<ActionsQueueState> {
+  private async _dequeueAll(): Promise<PromisesQueueState> {
 
     if (this.isPending) {
-      return Promise.resolve(ActionsQueueState.Pending);
+      return Promise.resolve(PromisesQueueState.Pending);
     }
 
     if (this.queue.length === 0) {
-      return Promise.resolve(ActionsQueueState.Empty);
+      return Promise.resolve(PromisesQueueState.Empty);
     }
 
     this.isPending = true;
@@ -86,10 +95,10 @@ export class ActionsQueue {
     }
 
     this.isPending = false;
-    return ActionsQueueState.Done;
+    return PromisesQueueState.Done;
   }
 
-  private async resolveAction(action: ActionsQueueItem): Promise<void> {
+  private async resolveAction(action: PromisesQueueItem): Promise<void> {
     if (this.beforeEach) {
       this.beforeEach(action);
     }

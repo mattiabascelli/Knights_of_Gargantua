@@ -48,41 +48,29 @@ export class EnemyFeatureComponent implements OnInit {
   }
 
   async onAttackAction() {
-    this.gameFlow.enqueueDebounced({
-      name: 'onAttackAction',
-      fn: async () => {
-        // TODO: Check for missed attack
-        await this.fightScenario().attack();
-        const damage = 1; // TODO
-        this.store.enemy.takeDamage(damage);
-      },
+    this.gameFlow.enqueueDebounced('Player tries attacking', async () => {
+      // TODO: Check for missed attack
+      await this.fightScenario().attack();
+      const damage = 1; // TODO
+      this.store.enemy.takeDamage(damage);
     });
   }
 
   onHealedAction() {
-    this.gameFlow.enqueueDebounced({
-      name: 'onHealedAction',
-      fn: async () => {
-        // TODO...
-      },
+    this.gameFlow.enqueueDebounced('Player heals', () => {
+      // ...
     });
   }
 
   onEnchantedAction() {
-    this.gameFlow.enqueueDebounced({
-      name: 'onEnchantedAction',
-      fn: async () => {
-        // TODO...
-      },
+    this.gameFlow.enqueueDebounced('Player visits Enchantments page', () => {
+      // ...
     });
   }
 
   onUsedScrollAction() {
-    this.gameFlow.enqueueDebounced({
-      name: 'onUsedScrollAction',
-      fn: async () => {
-        // TODO...
-      },
+    this.gameFlow.enqueueDebounced('Player used scroll', () => {
+      // ...
     });
   }
 }

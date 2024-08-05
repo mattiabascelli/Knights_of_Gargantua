@@ -1,7 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 
-import { ActionsQueue } from '@/common/queue/queue';
-import { ActionsQueueItem } from '@/common/queue/types';
+import { InputPromisesQueueItem, PromisesQueue, PromisesQueueItem } from '@/common/queue';
 import { GameEvent, generateGameEvent } from '../events';
 
 @Injectable({
@@ -10,37 +9,43 @@ import { GameEvent, generateGameEvent } from '../events';
 export class GameFlowService {
 
   event = signal<GameEvent | null>(null);
-  private queue = new ActionsQueue({
+  private queue = new PromisesQueue({
     autoDequeue: true,
     beforeEach: this.beforeEachAction.bind(this),
   });
 
   nextEvent(seed?: number) {
-    this.queue.add({
-      name: 'Trigger next game event',
-      fn: () => {
-        const gameEvent = generateGameEvent(seed);
-        console.log(gameEvent);
-        this.event.set(gameEvent);
-        return Promise.resolve();
-      },
+    this.queue.add('Trigger next game event', () => {
+
+      // TODO: Remove
+      console.log('Resolving next game event. Seed = ', seed);
+
+      const gameEvent = generateGameEvent(seed);
+      console.log(gameEvent);
+      this.event.set(gameEvent);
     });
   }
 
-  enqueue(action: ActionsQueueItem) {
-    this.queue.add(action);
+  enqueue(
+    actionOrMessage: InputPromisesQueueItem | InputPromisesQueueItem['message'],
+    inputFn?: InputPromisesQueueItem['fn'],
+  ) {
+    this.queue.add(actionOrMessage, inputFn);
   }
 
-  enqueueDebounced(action: ActionsQueueItem) {
-    this.queue.addDebounced(action);
+  enqueueDebounced(
+    actionOrMessage: InputPromisesQueueItem | InputPromisesQueueItem['message'],
+    inputFn?: InputPromisesQueueItem['fn'],
+  ) {
+    this.queue.addDebounced(actionOrMessage, inputFn);
   }
 
-  beforeEachAction(action: ActionsQueueItem) {
-    this.log(action.name);
+  beforeEachAction(action: PromisesQueueItem) {
+    this.log(action.message);
   }
 
   log(message: string): void {
     const t = (new Date()).toISOString();
-    console.log(`[GameFlow] [${t}] ${message}`);
+    console.log(`[Knights of Gargantua] [${t}] ${message}`);
   }
 }

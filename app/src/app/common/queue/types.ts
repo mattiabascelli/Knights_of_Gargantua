@@ -1,15 +1,20 @@
-export type ActionsQueueItem<T = any> = {
-  name: string;
+export type InputPromisesQueueItem<T = any> = {
+  message: string;
+  fn: (() => Promise<T>) | (() => T);
+};
+
+export type PromisesQueueItem<T = any> = {
+  message: string;
   fn: () => Promise<T>;
 };
 
-export type ActionsQueueConfig = {
+export type PromisesQueueConfig = {
   autoDequeue?: boolean;
-  beforeEach?: (action: ActionsQueueItem) => void;
-  afterEach?: (action: ActionsQueueItem) => void;
+  beforeEach?: (action: PromisesQueueItem) => void;
+  afterEach?: (action: PromisesQueueItem) => void;
 };
 
-export enum ActionsQueueState {
+export enum PromisesQueueState {
   Empty = 'empty',
   Pending = 'pending',
   Done = 'done',
