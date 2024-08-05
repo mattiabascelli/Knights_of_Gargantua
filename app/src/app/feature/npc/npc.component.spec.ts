@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NpcComponent } from './npc.component';
+import { NpcFeatureComponent } from './npc.component';
 
-describe('NpcComponent', () => {
-  let component: NpcComponent;
-  let fixture: ComponentFixture<NpcComponent>;
+describe('NpcFeatureComponent', () => {
+  let component: NpcFeatureComponent;
+  let fixture: ComponentFixture<NpcFeatureComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [NpcComponent]
+      imports: [NpcFeatureComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NpcComponent);
+    fixture = TestBed.createComponent(NpcFeatureComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
