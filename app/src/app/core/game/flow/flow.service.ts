@@ -11,15 +11,16 @@ export class GameFlowService {
 
   event = signal<GameEvent | null>(null);
   private queue = new ActionsQueue({
-    debug: true,
     autoDequeue: true,
+    beforeEach: this.beforeEachAction.bind(this),
   });
 
   nextEvent(seed?: number) {
     this.queue.add({
-      name: 'GameFlowService.nextEvent',
+      name: 'Trigger next game event',
       fn: () => {
         const gameEvent = generateGameEvent(seed);
+        console.log(gameEvent);
         this.event.set(gameEvent);
         return Promise.resolve();
       },
@@ -28,5 +29,18 @@ export class GameFlowService {
 
   enqueue(action: ActionsQueueItem) {
     this.queue.add(action);
+  }
+
+  enqueueDebounced(action: ActionsQueueItem) {
+    this.queue.addDebounced(action);
+  }
+
+  beforeEachAction(action: ActionsQueueItem) {
+    this.log(action.name);
+  }
+
+  log(message: string): void {
+    const t = (new Date()).toISOString();
+    console.log(`[GameFlow] [${t}] ${message}`);
   }
 }

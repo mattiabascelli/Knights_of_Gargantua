@@ -32,6 +32,6 @@ export class AppComponent {
 
   private onNotification() {
     const notifications = this.store.ui.notifications.notifications();
-    notifications.forEach(notif => console.log(notif));
+    notifications.forEach(notif => this.gameFlow.log(notif.message));
   }
 }

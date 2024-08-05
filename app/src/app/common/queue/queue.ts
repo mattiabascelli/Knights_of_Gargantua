@@ -1,14 +1,20 @@
 import { ActionsQueueItem, ActionsQueueConfig, ActionsQueueState } from './types';
 
 export class ActionsQueue {
+
+  // State
   private isPending = false;
   private queue: ActionsQueueItem[] = [];
-  private debug = false;
+
+  // Config
   private autoDequeue = true;
+  private beforeEach: ActionsQueueConfig['beforeEach'];
+  private afterEach: ActionsQueueConfig['afterEach'];
 
   constructor(config?: ActionsQueueConfig) {
-    this.debug = !!config?.debug || false;
     this.autoDequeue = !!config?.autoDequeue || false;
+    this.beforeEach = config?.beforeEach ?? undefined;
+    this.afterEach = config?.afterEach ?? undefined;
   }
 
   add(action: ActionsQueueItem): Promise<ActionsQueueState> {
@@ -57,9 +63,9 @@ export class ActionsQueue {
 
     this.isPending = true;
     const action = this.queue.shift()!;
-    this.log(action);
-    await action.fn();
+    await this.resolveAction(action);
     this.isPending = false;
+
     return ActionsQueueState.Done;
   }
 
@@ -76,19 +82,22 @@ export class ActionsQueue {
     this.isPending = true;
     while (this.queue.length > 0) {
       const action = this.queue.shift()!;
-      this.log(action);
-      await action.fn();
+      await this.resolveAction(action);
     }
+
     this.isPending = false;
     return ActionsQueueState.Done;
   }
 
-  private log(action: ActionsQueueItem): void {
-    if (!this.debug) {
-      return;
+  private async resolveAction(action: ActionsQueueItem): Promise<void> {
+    if (this.beforeEach) {
+      this.beforeEach(action);
     }
 
-    const timestamp = (new Date()).toISOString();
-    console.log(`[ActionsQueue] [${timestamp}] ${action.name}`);
+    await action.fn();
+
+    if (this.afterEach) {
+      this.afterEach(action);
+    }
   }
 }

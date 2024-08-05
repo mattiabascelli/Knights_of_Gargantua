@@ -4,8 +4,9 @@ export type ActionsQueueItem<T = any> = {
 };
 
 export type ActionsQueueConfig = {
-  debug?: boolean;
   autoDequeue?: boolean;
+  beforeEach?: (action: ActionsQueueItem) => void;
+  afterEach?: (action: ActionsQueueItem) => void;
 };
 
 export enum ActionsQueueState {

@@ -1,1 +1,1 @@
-- [ ] Debounce all actions during animations
+- [ ] Add minimum time gap between actions in the queue
