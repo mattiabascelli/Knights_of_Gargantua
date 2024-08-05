@@ -1,0 +1,75 @@
+@if (enemy(); as enemy) {
+
+  <div class="enemy">
+    <div class="enemy__info">
+      <app-fighter-indicator
+        [name]="enemy.name"
+        [level]="enemy.level"
+        [health]="enemy.health"
+        [healthCap]="enemy.healthCap"
+      />
+      <div class="enemy__stats">
+        <ul class="stats">
+          <li>
+            <strong>Armor</strong>
+            <span class="stat">{{ enemy.armor | appPadStart }}</span>
+          </li>
+          <li>
+            <strong>Damage</strong>
+            <span class="stat">{{ enemy.damage | appPadStart }}</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="enemy__image">
+      <app-enemy-image
+        [idlePath]="enemy.image.idle"
+        [defendingPath]="enemy.image.defending"
+        width="250"
+        height="350"
+        [animationDuration]="animationDuration()"
+        [alt]="enemy.name"
+      />
+    </div>
+  </div>
+}
+
+@if (player(); as player) {
+  <div class="player" [class.--attacking]="isAttacking()">
+    <div class="player__info">
+      <app-fighter-indicator
+        [name]="player.name"
+        [level]="player.level"
+        [health]="player.health"
+        [healthCap]="player.healthCap"
+      />
+    </div>
+    <div class="player__image">
+      <img
+        [src]="player.image.back"
+        width="250"
+        height="250"
+        [alt]="player.name"
+      >
+    </div>
+    <div class="player__actions">
+
+      <button class="button --primary" (click)="attacked.emit()">
+        <kbd>W</kbd> Attack
+      </button>
+
+      <button class="button --outline" (click)="enchanted.emit()">
+        <kbd>A</kbd> Enchant
+      </button>
+
+      <button class="button --outline" (click)="healed.emit()">
+        <kbd>S</kbd> Heal
+      </button>
+
+      <button class="button --outline" (click)="usedScroll.emit()">
+        <kbd>D</kbd> Use Scroll
+      </button>
+
+    </div>
+  </div>
+}

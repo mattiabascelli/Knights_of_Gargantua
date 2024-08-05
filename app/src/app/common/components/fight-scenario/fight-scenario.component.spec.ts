@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GatherComponent } from './gather.component';
+import { FightScenarioComponent } from './fight-scenario.component';
 
-describe('GatherComponent', () => {
-  let component: GatherComponent;
-  let fixture: ComponentFixture<GatherComponent>;
+describe('FightScenarioComponent', () => {
+  let component: FightScenarioComponent;
+  let fixture: ComponentFixture<FightScenarioComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [GatherComponent]
+      imports: [FightScenarioComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(GatherComponent);
+    fixture = TestBed.createComponent(FightScenarioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

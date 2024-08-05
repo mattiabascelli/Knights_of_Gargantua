@@ -1,8 +1,9 @@
 import { Component, effect, inject } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 
-import { GameFlowService, getRouteByGameEvent } from './core/game';
 import { StoreService } from './core/store';
+import { getRouteByGameEvent } from './core/game/events';
+import { GameFlowService } from './core/game/flow';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +32,6 @@ export class AppComponent {
 
   private onNotification() {
     const notifications = this.store.ui.notifications.notifications();
-    notifications.forEach(notif => console.log(notif));
+    notifications.forEach(notif => this.gameFlow.log(notif.message));
   }
 }

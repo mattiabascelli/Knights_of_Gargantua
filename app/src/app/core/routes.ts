@@ -3,7 +3,7 @@ export const ROUTE = {
   CHALLENGE: 'challenge',
   ENEMY: 'enemy',
   ENERGY_SORCE: 'energy-source',
-  GATHER: 'gather',
+  COLLECT: 'collect',
   NPC: 'npc',
   REST: 'rest',
 } as const;

@@ -1,39 +1,54 @@
-import { ActionsQueueItem, ActionsQueueConfig, ActionsQueueState } from './types';
+import { mapToPromisesQueueItem } from './functions';
+import { PromisesQueueItem, PromisesQueueConfig, PromisesQueueState, InputPromisesQueueItem } from './types';
 
-export class ActionsQueue {
+export class PromisesQueue {
+
+  // State
   private isPending = false;
-  private queue: ActionsQueueItem[] = [];
-  private debug = false;
-  private autoDequeue = true;
+  private queue: PromisesQueueItem[] = [];
 
-  constructor(config?: ActionsQueueConfig) {
-    this.debug = !!config?.debug || false;
+  // Config
+  private autoDequeue = true;
+  private beforeEach: PromisesQueueConfig['beforeEach'];
+  private afterEach: PromisesQueueConfig['afterEach'];
+
+  constructor(config?: PromisesQueueConfig) {
     this.autoDequeue = !!config?.autoDequeue || false;
+    this.beforeEach = config?.beforeEach ?? undefined;
+    this.afterEach = config?.afterEach ?? undefined;
   }
 
-  add(action: ActionsQueueItem): Promise<ActionsQueueState> {
+  add(
+    actionOrMessage: InputPromisesQueueItem | InputPromisesQueueItem['message'],
+    inputFn?: InputPromisesQueueItem['fn'],
+  ): Promise<PromisesQueueState> {
+    const action = mapToPromisesQueueItem(actionOrMessage, inputFn);
     this.queue.push(action);
 
     if (this.autoDequeue) {
       return this._dequeueAll();
     }
 
-    return Promise.resolve(ActionsQueueState.Done);
+    return Promise.resolve(PromisesQueueState.Done);
   }
 
-  addDebounced(action: ActionsQueueItem): Promise<ActionsQueueState> {
+  addDebounced(
+    actionOrMessage: InputPromisesQueueItem | InputPromisesQueueItem['message'],
+    inputFn?: InputPromisesQueueItem['fn'],
+  ): Promise<PromisesQueueState> {
     if (this.isPending) {
-      return Promise.resolve(ActionsQueueState.Pending);
+      return Promise.resolve(PromisesQueueState.Pending);
     }
+    const action = mapToPromisesQueueItem(actionOrMessage, inputFn);
     return this.add(action);
   }
 
-  async dequeueOne(): Promise<ActionsQueueState> {
+  async dequeueOne(): Promise<PromisesQueueState> {
     this.checkManualDequeueing();
     return this._dequeueOne();
   }
 
-  async dequeueAll(): Promise<ActionsQueueState> {
+  async dequeueAll(): Promise<PromisesQueueState> {
     this.checkManualDequeueing();
     return this._dequeueAll();
   }
@@ -46,49 +61,52 @@ export class ActionsQueue {
     }
   }
 
-  private async _dequeueOne(): Promise<ActionsQueueState> {
+  private async _dequeueOne(): Promise<PromisesQueueState> {
     if (this.isPending) {
-      return Promise.resolve(ActionsQueueState.Pending);
+      return Promise.resolve(PromisesQueueState.Pending);
     }
 
     if (this.queue.length === 0) {
-      return Promise.resolve(ActionsQueueState.Empty);
+      return Promise.resolve(PromisesQueueState.Empty);
     }
 
     this.isPending = true;
     const action = this.queue.shift()!;
-    this.log(action);
-    await action.fn();
+    await this.resolveAction(action);
     this.isPending = false;
-    return ActionsQueueState.Done;
+
+    return PromisesQueueState.Done;
   }
 
-  private async _dequeueAll(): Promise<ActionsQueueState> {
+  private async _dequeueAll(): Promise<PromisesQueueState> {
 
     if (this.isPending) {
-      return Promise.resolve(ActionsQueueState.Pending);
+      return Promise.resolve(PromisesQueueState.Pending);
     }
 
     if (this.queue.length === 0) {
-      return Promise.resolve(ActionsQueueState.Empty);
+      return Promise.resolve(PromisesQueueState.Empty);
     }
 
     this.isPending = true;
     while (this.queue.length > 0) {
       const action = this.queue.shift()!;
-      this.log(action);
-      await action.fn();
+      await this.resolveAction(action);
     }
+
     this.isPending = false;
-    return ActionsQueueState.Done;
+    return PromisesQueueState.Done;
   }
 
-  private log(action: ActionsQueueItem): void {
-    if (!this.debug) {
-      return;
+  private async resolveAction(action: PromisesQueueItem): Promise<void> {
+    if (this.beforeEach) {
+      this.beforeEach(action);
     }
 
-    const timestamp = (new Date()).toISOString();
-    console.log(`[ActionsQueue] [${timestamp}] ${action.name}`);
+    await action.fn();
+
+    if (this.afterEach) {
+      this.afterEach(action);
+    }
   }
 }

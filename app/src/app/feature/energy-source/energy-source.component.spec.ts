@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EnergySourceComponent } from './energy-source.component';
+import { EnergySourceFeatureComponent } from './energy-source.component';
 
-describe('EnergySourceComponent', () => {
-  let component: EnergySourceComponent;
-  let fixture: ComponentFixture<EnergySourceComponent>;
+describe('EnergySourceFeatureComponent', () => {
+  let component: EnergySourceFeatureComponent;
+  let fixture: ComponentFixture<EnergySourceFeatureComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [EnergySourceComponent]
+      imports: [EnergySourceFeatureComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EnergySourceComponent);
+    fixture = TestBed.createComponent(EnergySourceFeatureComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
