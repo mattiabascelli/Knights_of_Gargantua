@@ -1,9 +1,0 @@
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-body {
-  background: url('/img/background.jpg') fixed no-repeat;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  margin: 0;
-}
