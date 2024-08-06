@@ -1,4 +1,5 @@
 import { wait } from '../functions';
+import { gameSeqEventsCreator } from './functions';
 import { GameSeq } from './gameseq';
 
 export function gameSeqExample(): () => void {
@@ -17,9 +18,20 @@ export function gameSeqExample(): () => void {
   const game = new GameSeq<MyGameEventName>(rootElement);
 
   // Declare event creators
-  const triesAttacking = game.event(MyGameEventName.TriesAttacking);
-  const misses = game.event(MyGameEventName.Misses);
-  const hits = game.eventWithPayload<number>(MyGameEventName.Hits);
+  const triesAttacking = () => ({
+    name: MyGameEventName.TriesAttacking,
+    payload: undefined,
+  });
+
+  const misses = () => ({
+    name: MyGameEventName.Misses,
+    payload: undefined,
+  });
+
+  const hits = (damage: number) => ({
+    name: MyGameEventName.Hits,
+    payload: { damage },
+  });
 
   // Declare event handlers
   game.on(MyGameEventName.TriesAttacking, async (_, trigger) => {

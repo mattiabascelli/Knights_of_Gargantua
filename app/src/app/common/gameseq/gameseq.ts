@@ -1,3 +1,4 @@
+import { DEFAULT_ANIMATION_DURATION } from '@/core/game/constants';
 import { GameSeqQueue } from './queue';
 import { GameSeqEvent, GameSeqEventWithoutPayloadCreator, GameSeqEventWithPayloadCreator } from './types';
 
@@ -8,6 +9,7 @@ export class GameSeq<TName extends string> {
   private gameEventName: string;
   private _destroy = new AbortController();
   private queue!: GameSeqQueue;
+  private rootElement!: HTMLElement | Document;
 
   // TODO: Better typing
   private eventHandlers = new Map<
@@ -19,12 +21,16 @@ export class GameSeq<TName extends string> {
   >();
 
   constructor(
-    private rootElement: HTMLElement,
+    rootElement?: HTMLElement | Document,
     queue?: GameSeqQueue,
     gameEventPrefix?: string,
   ) {
+    this.rootElement = rootElement ?? document;
+    this.queue = queue ?? new GameSeqQueue({
+      autoDequeue: true,
+      pauseBetweenEvents: DEFAULT_ANIMATION_DURATION,
+    });
     this.gameEventName = this.buildGameEventName(gameEventPrefix);
-    this.queue = this.queue ?? new GameSeqQueue({ autoDequeue: true });
   }
 
   init() {
@@ -48,18 +54,6 @@ export class GameSeq<TName extends string> {
 
   destroy() {
     this._destroy.abort();
-  }
-
-  event(
-    name: TName
-  ): GameSeqEventWithoutPayloadCreator<TName, undefined> {
-    return () => ({ name, payload: undefined });
-  }
-
-  eventWithPayload<TPayload = any>(
-    name: TName
-  ): GameSeqEventWithPayloadCreator<TName, TPayload> {
-    return (payload: TPayload) => ({ name, payload });
   }
 
   trigger(event: GameSeqEvent<TName>, config?: { debounced?: boolean }) {
