@@ -1,1 +1,2 @@
-- [ ] Add minimum time gap between actions in the queue
+- [ ] Rename "Gameflux" to "GameSeq"
+- [ ] Remove required "queue" argument for "GameSeq" constructor

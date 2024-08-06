@@ -10,6 +10,7 @@ export type PromisesQueueItem<T = any> = {
 
 export type PromisesQueueConfig = {
   autoDequeue?: boolean;
+  pauseBetweenEvents?: number;
   beforeEach?: (action: PromisesQueueItem) => void;
   afterEach?: (action: PromisesQueueItem) => void;
 };
