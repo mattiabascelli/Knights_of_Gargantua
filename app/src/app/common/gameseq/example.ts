@@ -1,10 +1,9 @@
 import { wait } from '../functions';
-import { PromisesQueue } from '../queue';
-import { Gameflux } from './gameflux';
+import { GameSeq } from './gameseq';
 
-export function gamefluxExample(): () => void {
+export function gameSeqExample(): () => void {
 
-  console.log('gamefluxExample');
+  console.log('gameSeqExample');
 
   // Declare event names
   enum MyGameEventName {
@@ -13,10 +12,9 @@ export function gamefluxExample(): () => void {
     Hits = 'hits',
   }
 
-  // Init the game flux
+  // Init the game
   const rootElement = document.body;
-  const queue = new PromisesQueue();
-  const game = new Gameflux<MyGameEventName>(rootElement, queue);
+  const game = new GameSeq<MyGameEventName>(rootElement);
 
   // Declare event creators
   const triesAttacking = game.event(MyGameEventName.TriesAttacking);
