@@ -1,2 +1,2 @@
-- [ ] Rename "Gameflux" to "GameSeq"
-- [ ] Remove required "queue" argument for "GameSeq" constructor
+- [ ] Remove `PromisesQueue` from `GameFlowService`
+- [ ] Add better typing for `GameSeq` event handlers

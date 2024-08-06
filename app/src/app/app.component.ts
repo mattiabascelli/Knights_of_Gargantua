@@ -4,7 +4,7 @@ import { Router, RouterOutlet } from '@angular/router';
 import { StoreService } from './core/store';
 import { getRouteByGameEvent } from './core/game/events';
 import { GameFlowService } from './core/game/flow';
-import { gamefluxExample } from './common/gameflux/example';
+import { gameSeqExample } from './common/gameseq/example';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +22,11 @@ export class AppComponent {
 
   onNextGameEventEffect = effect(() => this.onNextGameEvent());
   onNotificationEffect = effect(() => this.onNotification());
+
+  // TODO: Remove
+  ngOnInit() {
+    gameSeqExample();
+  }
 
   private onNextGameEvent() {
     const gameEvent = this.gameFlow.event();
