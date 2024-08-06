@@ -2,6 +2,7 @@ import { Injectable, signal } from '@angular/core';
 
 import { InputPromisesQueueItem, PromisesQueue, PromisesQueueItem } from '@/common/queue';
 import { GameEvent, generateGameEvent } from '../events';
+import { DEFAULT_ANIMATION_DURATION } from '../constants';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +12,12 @@ export class GameFlowService {
   event = signal<GameEvent | null>(null);
   private queue = new PromisesQueue({
     autoDequeue: true,
+    pauseBetweenEvents: DEFAULT_ANIMATION_DURATION,
     beforeEach: this.beforeEachAction.bind(this),
   });
 
   nextEvent(seed?: number) {
     this.queue.add('Trigger next game event', () => {
-
-      // TODO: Remove
-      console.log('Resolving next game event. Seed = ', seed);
-
       const gameEvent = generateGameEvent(seed);
       console.log(gameEvent);
       this.event.set(gameEvent);

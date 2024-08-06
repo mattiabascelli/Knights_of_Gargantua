@@ -1,3 +1,4 @@
+import { wait } from '../functions';
 import { mapToPromisesQueueItem } from './functions';
 import { PromisesQueueItem, PromisesQueueConfig, PromisesQueueState, InputPromisesQueueItem } from './types';
 
@@ -9,11 +10,13 @@ export class PromisesQueue {
 
   // Config
   private autoDequeue = true;
+  private pauseBetweenEvents = 0;
   private beforeEach: PromisesQueueConfig['beforeEach'];
   private afterEach: PromisesQueueConfig['afterEach'];
 
   constructor(config?: PromisesQueueConfig) {
     this.autoDequeue = !!config?.autoDequeue || true;
+    this.pauseBetweenEvents = config?.pauseBetweenEvents ?? 0;
     this.beforeEach = config?.beforeEach ?? undefined;
     this.afterEach = config?.afterEach ?? undefined;
   }
@@ -107,6 +110,10 @@ export class PromisesQueue {
 
     if (this.afterEach) {
       this.afterEach(action);
+    }
+
+    if (this.pauseBetweenEvents) {
+      await wait(this.pauseBetweenEvents);
     }
   }
 }
