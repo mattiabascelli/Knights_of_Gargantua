@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@ngrx/signals": "^18.0.2"
+  }
+}

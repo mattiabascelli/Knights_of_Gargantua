@@ -1,72 +1,83 @@
+import { patchState } from '@ngrx/signals';
+
 import { GameSeq } from '@/common/gameseq';
 import { enemyEvent, KogEvent, pageEvent, playerEvent } from './events';
+import { createKogState } from './state';
+import { assertPlayerExists, assertEnemyExists, calculateDamage, baseCrit, createNewPlayer, chance } from './functions';
 
 export function registerKogGameHandlers(game: GameSeq<KogEvent>) {
 
-  // State
-  let player = {
-    name: 'John Doe',
-    hp: 10,
-  };
-
-  let enemy = {
-    hp: 5,
-  };
+  const state = createKogState();
 
   game.on(KogEvent.PlayerChoosesName, (event, trigger) => {
-    player.name = event.payload;
+    const playerName = event.payload;
+    const player = createNewPlayer(playerName);
+    patchState(state, { player });
     trigger(pageEvent.fight());
   });
 
   game.on(KogEvent.PlayerAttacks, (_, trigger) => {
+    const currentState = state();
+    assertPlayerExists(currentState);
+    assertEnemyExists(currentState);
+
     if (chance(10)) {
-      trigger(playerEvent.misses());
-      return;
+      return trigger(playerEvent.misses());
     }
 
-    const damage = 2 + (chance(50) ? 1 : 0);
-    trigger(playerEvent.hits(damage));
+    trigger(playerEvent.hits());
   });
 
   game.on(KogEvent.PlayerMisses, (_, trigger) => {
+    const currentState = state();
+    assertPlayerExists(currentState);
+    assertEnemyExists(currentState);
     trigger(enemyEvent.attacks());
   });
 
-  game.on(KogEvent.PlayerHits, (event, trigger) => {
-    const damage = event.payload;
-    enemy.hp -= damage;
-    if (enemy.hp === 0) {
-      trigger(enemyEvent.dies());
-      return;
+  game.on(KogEvent.PlayerHits, (_, trigger) => {
+    const currentState = state();
+    assertPlayerExists(currentState);
+    assertEnemyExists(currentState);
+    const player = state.player()!;
+    const enemy = structuredClone(state.enemy()!);
+    const damage = calculateDamage(player, enemy, baseCrit);
+    enemy.health -= damage;
+
+    if (enemy.health <= 0) {
+      return trigger(enemyEvent.dies());
     }
+
+    patchState(state, { enemy });
     trigger(enemyEvent.attacks());
   });
 
   game.on(KogEvent.EnemyAttacks, (_, trigger) => {
+    const currentState = state();
+    assertPlayerExists(currentState);
+    assertEnemyExists(currentState);
+
     if (chance(10)) {
-      trigger(enemyEvent.misses());
-      return;
+      return trigger(enemyEvent.misses());
     }
-
-    const damage = 2 + (chance(50) ? 1 : 0);
-    trigger(enemyEvent.hits(damage));
+    
+    trigger(enemyEvent.hits());
   });
 
-  game.on(KogEvent.EnemyHits, (event, trigger) => {
-    const damage = event.payload;
-    player.hp -= damage;
-    if (player.hp === 0) {
-      trigger(playerEvent.dies());
-      return;
+  game.on(KogEvent.EnemyHits, (_, trigger) => {
+    const currentState = state();
+    assertPlayerExists(currentState);
+    assertEnemyExists(currentState);
+
+    const player = structuredClone(currentState.player!);
+    const enemy = currentState.enemy!;
+    const damage = calculateDamage(enemy, player, baseCrit);
+    player.health -= damage;
+
+    if (enemy.health <= 0) {
+      return trigger(playerEvent.dies());
     }
+
+    patchState(state, { player });
   });
-}
-
-// TODO: Move
-export function chance(thresholdPercentage: number) {
-  if (thresholdPercentage >= 100) {
-    return true;
-  }
-
-  return Math.random() > 1 - (thresholdPercentage / 100);
 }
