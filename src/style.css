@@ -15,6 +15,14 @@
     
 }
 
+.imgHero {
+    max-height: 450px;
+    float:right;
+}
+.imgEnemy {
+    max-height: 450px;
+    float:left;
+}
 .button {
     background: url("../img/button_down.png") no-repeat;
     border:0;
@@ -65,7 +73,8 @@
 }
 
 .battle p {
-    
+    margin: 2px 2px 2px 2px;
+    font-size:small;
 }
 
 #hit-message, #broken-weapon-message {
@@ -104,13 +113,13 @@
     }
 
     #game-screen {
-       
+        max-width: 760px
     }
 
   
 
     .shop {
-        
+        max-width: 760px
         transition: all 0.2s ease-in;
     }
 
