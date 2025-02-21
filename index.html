@@ -73,43 +73,34 @@
                         
                 </div>
                 <div class="row">
-                    <div class="col">
-                    <div class="battle" id="enemy">
-                        <h3 id="enemy-name"></h3>
+                    <div class="col-sm-3">
+                        <button class="button" onclick="attack()"><strong>ATTACCA</strong></button>
+                        <button class="button" onclick="healthUp()"><strong>CURATI</strong></button>
+                        <button class="button" onclick="shop()"><strong>INCANTAMENTO</strong></button>   
+                    </div>     
+                    
+                    <div class="col-sm-3">
+                        <p>DETTAGLI COMBATTIMENTO:</p>
                         <p id="hit-message"></p>
                         <p id="miss-message"></p>
                         <p id=loot-message></p>
                         <p id="level-up-message"></p>
                         <p id="broken-weapon-message"></p>
-                        <p id="broken-weapon-message"></p>
-
-                        <hr />
-                        <p><strong>Difficoltà:</strong> <span id="enemy-level"></span></p>
-                        <p><strong>Punti Ferita:</strong> <span id="enemy-health"></span></p>
-                        <p><strong>Potenza d'attacco:</strong> <span id="enemy-attack"></span></p>
-
-                    </div>
-                </div>
-                    <!--tasti-->
-                    <div class="col">
-                    <button class="button" onclick="attack()"><strong>ATTACCA</strong></button>
-                    <button class="button" onclick="healthUp()"><strong>CURATI</strong></button>
-                    <button class="button" onclick="shop()"><strong>INCANTAMENTO</strong></button>   
-                </div>                       
+                        <p id="broken-weapon-message"></p> 
+                    </div> 
+                    <div class="col-sm-3">
+                        <!--Nemici-->
+                        <div class="battle" id="enemy">
+                            <h3 id="enemy-name">Morkain'thur benedetto dal Velo</h3>
+                            <p><strong>Difficoltà:</strong> <span id="enemy-level"></span></p>
+                            <p><strong>Punti Ferita:</strong> <span id="enemy-health"></span></p>
+                            <p><strong>Potenza d'attacco:</strong> <span id="enemy-attack"></span></p>
+    
+                        </div>
+                    </div>       
+                                      
                 </div>      
-                <hr>
-                <div class="row align-items-start">
-                  <div class="col">
-                    <!--Tuoi dati-->
-                    
-                  </div>
-                  <div class="col">
-                    <!--Dati Nemico-->
-                    
-                  </div>
-                  <div class="col">
-                  
-                </div>
+                
                 </div>
             </div>
                 <!--
