@@ -79,19 +79,19 @@
 
 #hit-message, #broken-weapon-message {
     color: red;
-    font-size:20px;
+    font-size:12px;
 }
 
 #miss-message {
     color: firebrick;
-    font-size: 20px;
+    font-size: 12px;
 }
     
 
 
 #level-up-message, #loot-message {
     color: maroon;
-    font-size: 20px;
+    font-size: 14px;
 }
     
 

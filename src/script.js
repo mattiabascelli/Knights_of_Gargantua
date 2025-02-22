@@ -18,6 +18,9 @@ var player = {
 
 var numz;
 
+var fightCounter = 0;
+
+
 //Dichiarazione incantamenti [In precedenza Mercante di armi e armature]
 var merch_weapons = [
     { name: "Lama Oscura", attack: 2, price: 10, durability: 6 },
@@ -114,14 +117,15 @@ function noSangue() {
 }
 
 function attack() {
-
+        fightCounter += 1;
         if (parseInt(document.getElementById("enemy-health").textContent) <= 0) {
             document.getElementById("hit-message").textContent = "Hai massacrato il tuo avversario!"
+            
         } else {
             if (Math.floor(Math.random() * 10) >= 9) {//una possibilit� su dieci di mancare il bersaglio
                 //ad ogni attacco il valore della salute viene estrapolato dalla scheda per non intaccare quello nell'array
                 enemyAttack()
-                document.getElementById("miss-message").textContent = "Bersaglio mancato!"
+                document.getElementById("miss-message").textContent = "["+fightCounter+"]: Bersaglio mancato!"
             } else {
                 clearMessages()
                 let enemy_health = parseInt(document.getElementById("enemy-health").textContent);
@@ -146,12 +150,12 @@ function attack() {
 
     function enemyAttack() {//una possibilita su dieci di mancare il bersaglio
         if (Math.floor(Math.random() * 10) >= 9) {
-            document.getElementById("miss-message").textContent += "Riesci a schivare il colpo del mostro!"
+            document.getElementById("miss-message").textContent += "["+fightCounter+"]: Riesci a schivare il colpo del mostro!"
         } else {
             clearMessages()
             let enemy_attack = parseInt(document.getElementById("enemy-attack").textContent);
             player.defense != 0 ? player.health -= Math.floor(enemy_attack - (enemy_attack * player.defense / 100)) : player.health -= enemy_attack;
-            player.health > 0 ? document.getElementById("hit-message").textContent = "Sei stato colpito! " : new_winner = playerDeath();
+            player.health > 0 ? document.getElementById("hit-message").textContent = "["+fightCounter+"]: Sei stato colpito! " : new_winner = playerDeath();
             if (player.armor_durability > 0) {
                 player.armor_durability--;
                 if (player.armor_durability == 0) {
@@ -166,6 +170,7 @@ function attack() {
     function enemyDeath() {
         document.getElementById("enemy-health").textContent = 0;
         document.getElementById("miss-message").textContent = "Un mostro in meno a Gargantua! Continua la tua ronda..";
+        fightCounter = 0;
         let loot = getLoot();
         let xp = getXp();
         document.getElementById("loot-message").textContent = loot + xp;
@@ -175,6 +180,7 @@ function attack() {
 
     function playerDeath() {
         new_winner = document.getElementById("enemy-name").textContent;
+        fightCounter = 0;
         document.getElementById("player").style.display = "none";
         document.getElementById("enemy").classList.add("hide");
         document.getElementById("enemy").style.display = "none";
