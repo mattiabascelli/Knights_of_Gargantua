@@ -154,8 +154,8 @@ function attack() {
         } else {
             clearMessages()
             let enemy_attack = parseInt(document.getElementById("enemy-attack").textContent);
-            player.defense != 0 ? player.health -= Math.floor(enemy_attack - (enemy_attack * player.defense / 100)) : player.health -= enemy_attack;
-            player.health > 0 ? document.getElementById("hit-message").textContent = "["+fightCounter+"]: Sei stato colpito! " : new_winner = playerDeath();
+            player.defense != 0 ? player.health -= Math.floor(enemy_attack - player.defense) : player.health -= enemy_attack;
+            player.health > 0 ? document.getElementById("hit-message").textContent = "["+fightCounter+"]: Sei stato colpito! Il mostro ti ha inflitto " + (enemy_attack - player.defense) + " danni!" : new_winner = playerDeath();
             if (player.armor_durability > 0) {
                 player.armor_durability--;
                 if (player.armor_durability == 0) {
@@ -279,7 +279,9 @@ function attack() {
                 player.healing_potions--;
                 if (player.health > player.max_health) {
                     player.health = player.max_health;
-                }
+                    document.getElementById("miss-message").textContent = "La pozione ti ha curato completamente!";
+
+                } else {document.getElementById("miss-message").textContent = "I tuoi Punti Ferita sono saliti a " + player.health + "!" ;}
             }
         }
         startPlayer();
