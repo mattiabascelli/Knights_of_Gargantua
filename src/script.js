@@ -24,7 +24,7 @@ var enemyTotalLife = 0;
 var enemyLifeValue = 0;
 var fightCounter = 0;
 var enemyCounter = 0;
-
+var monstername ="";
 //Dichiarazione incantamenti [In precedenza Mercante di armi e armature]
 var merch_weapons = [
     { name: "Lama Oscura", attack: 2, price: 10, durability: 6 },
@@ -104,17 +104,50 @@ function startEnemy() {
         numz = Math.trunc(MAX * Math.random()) + 1;
         //assegnazione dei valori al nemico
         document.getElementById("enemy").classList.remove("hide")
-        document.getElementById("enemy-name").textContent = enemy.name[Math.floor(Math.random() * enemy.name.length)] + enemy.title[Math.floor(Math.random() * enemy.title.length)];
+        monstername = enemy.name[Math.floor(Math.random() * enemy.name.length)] + enemy.title[Math.floor(Math.random() * enemy.title.length)];
+        document.getElementById("enemy-name").textContent = monstername;
         document.getElementById("enemy-level").textContent = Math.floor(Math.random() * parseInt(player.level) + player.level / 3 + 1)
         enemyTotalLife = Math.floor(Math.random() * parseInt(document.getElementById("enemy-level").textContent * 10) + (player.level * 2));
         document.getElementById("enemy-health").textContent = enemyTotalLife;
         document.getElementById("enemy-attack").textContent = Math.floor(Math.random() * parseInt(document.getElementById("enemy-level").textContent * 4) + (player.level * 2));
         enemyimg.src = "img/mostro" + numz + ".png";
+        document.getElementById("monsterName").textContent = monstername;
+        switch(numz){
+            case 1 :
+                document.getElementById("monsterType").textContent = "Corrotto dal Vuoto";
+                document.getElementById("monsterDesc").textContent = "Un tempo era un Umano, la corruzione del vuoto ha plasmato il suo corpo e annabbiato la sua mente. Ora vaga per Gargantua con l'unico scopo di Corrompere o Massacrare chiunque gli sbarri la strada..."
+                break;
+            case 2 :
+                document.getElementById("monsterType").textContent = "Aberrazione del Velo";
+                document.getElementById("monsterDesc").textContent = "Tra le prime Creature ad apparire dopo che lo squacio del Velo ha permesso alla Corruzione del Vuoto di invadere Gargantua. Un essere spregevole e pericoloso..."
+                break;
+            case 3 :
+                    document.getElementById("monsterType").textContent = "Aberrazione del Velo";
+                    document.getElementById("monsterDesc").textContent = "Affamato di carne e incubi, non esista ad usare i suoi poteri mentali per dar impazzire le sue vittime. Tra le belve più pericolose che scorazzano a Gargantua..."
+                break;
+            case 4 :
+                    document.getElementById("monsterType").textContent = "Corrotto dal Vuoto";
+                    document.getElementById("monsterDesc").textContent = "La prova di quanto la corruzione del vuoto possa devastare un uomo. Letale quanto pericoloso..."
+                break;
+            case 5 :
+                    document.getElementById("monsterType").textContent = "Cultista del Vuoto";
+                    document.getElementById("monsterDesc").textContent = "Predicatore di lingue morte. Infame avvelenatore di Gargantua come tutto il suo culto..."
+                break;
+            case 6 :
+                    document.getElementById("monsterType").textContent = "Corrotto dal Vuoto";
+                    document.getElementById("monsterDesc").textContent = "Persino le fragili creature che girano per i vicoli di Gargantua non sono immuni alla corruzione..."
+                    break;
+            default:
+                document.getElementById("monsterType").textContent = "Corrotto dal Vuoto";
+                document.getElementById("monsterDesc").textContent = "Alcune delle creature corrotte possono acquisire le conoscenze degli umani ed usarle per portare paura e disperazione a Gargantua..."
+                break;
+        }
+        
         enemyLife = "width: 100%";
         document.getElementById("monsterlife").style = enemyLife;
         clearMessages();
 
-};
+        };
 
 function sangue() {
     enemyimg.src = "img/mostro" + numz + "_sangue.png";
@@ -194,7 +227,6 @@ function attack() {
     };
 
     function playerDeath() {
-        killer = document.getElementById("enemy-name").textContent;
         fightCounter = 0;
         document.getElementById("player").style.display = "none";
         document.getElementById("enemy").classList.add("hide");
@@ -208,7 +240,7 @@ function attack() {
                         <div class="battle" id="player">
                         <div id="death-screen">
                         <h1>${player.name}, sei stato Sconfitto!</h1>
-                        <p><strong> ${killer} </strong> ti ha massacrato..
+                        <p><strong> ${monstername} </strong> ti ha massacrato..
                         </p>
                         <p>Durante la tua Ronda hai sconfitto <strong>` +enemyCounter+ `</strong> nemici... </p>
                         </div>
@@ -445,3 +477,13 @@ function attack() {
         document.getElementById("broken-weapon-message").textContent = "";
         document.getElementById("level-up-message").textContent = "";
     }
+
+const toastTrigger = document.getElementById('liveToastBtn')
+const toastLiveExample = document.getElementById('liveToast')
+
+if (toastTrigger) {
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+  toastTrigger.addEventListener('click', () => {
+    toastBootstrap.show()
+  })
+}

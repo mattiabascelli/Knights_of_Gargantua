@@ -101,7 +101,24 @@
                                 <div class="progress-bar bg-danger" id="monsterlife" style="width: 100%"></div>
                             </div>
                             <p><strong>Potenza d'attacco:</strong> <span id="enemy-attack"></span></p>
-    
+                            
+                            <button type="button" class="btn btn-danger" id="liveToastBtn"><strong>Descrizione</strong></button>
+
+                            <div class="toast-container position-fixed top-50 end-20 translate-middle-y">
+                              <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                                <div class="toast-header">
+                                  
+                                  <strong class="me-auto" id="monsterName">Bootstrap</strong>
+                                  <small id="monsterType">11 mins ago</small>
+                                  <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                                </div>
+                                <div class="toast-body" id="monsterDesc">
+                                  Hello, world! This is a toast message.
+                                </div>
+                              </div>
+                            </div>     
+
+
                         </div>
                     </div>       
                                       
