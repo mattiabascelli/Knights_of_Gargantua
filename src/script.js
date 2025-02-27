@@ -222,9 +222,10 @@ function attack() {
                         <div class="col-sm-3">
                             <!--Personaggio-->
                             <img src="img/pg_umano.png" class="imgHero" alt="Responsive image" id="pg_umano" />
+                            
                         </div>
                         <div class="col-sm-3">
-                          
+                          <a href=""><button class="button"><strong>Riprova</strong></button></a>
                         </div>
                         
                 </div>`
