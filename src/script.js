@@ -23,7 +23,7 @@ var enemyLife = "width: 100%";
 var enemyTotalLife = 0;
 var enemyLifeValue = 0;
 var fightCounter = 0;
-
+var enemyCounter = 0;
 
 //Dichiarazione incantamenti [In precedenza Mercante di armi e armature]
 var merch_weapons = [
@@ -185,6 +185,7 @@ function attack() {
         document.getElementById("enemy-health").textContent = 0;
         document.getElementById("miss-message").textContent = "Un mostro in meno a Gargantua! Continua la tua ronda..";
         fightCounter = 0;
+        enemyCounter += 1;
         let loot = getLoot();
         let xp = getXp();
         document.getElementById("loot-message").textContent = loot + xp;
@@ -193,49 +194,46 @@ function attack() {
     };
 
     function playerDeath() {
-        new_winner = document.getElementById("enemy-name").textContent;
+        killer = document.getElementById("enemy-name").textContent;
         fightCounter = 0;
         document.getElementById("player").style.display = "none";
         document.getElementById("enemy").classList.add("hide");
         document.getElementById("enemy").style.display = "none";
         setTimeout(function () {
-            document.getElementById("game-screen").innerHTML += `<div id="death-screen">
-        <h1>${player.name}, sei stato Sconfitto!</h1>
-        <p><strong> ${new_winner} </strong> ti ha massacrato.. ma il tuo flebile cuore batte ancora...
-        </p>
-        <button class="button" onclick="restart()">Rinasci</button>
-        </div>`
+            document.getElementById("game-screen").innerHTML = `
+        <div class="containerz">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <!--Personaggio Statistiche-->
+                        <div class="battle" id="player">
+                        <div id="death-screen">
+                        <h1>${player.name}, sei stato Sconfitto!</h1>
+                        <p><strong> ${killer} </strong> ti ha massacrato..
+                        </p>
+                        <p>Durante la tua Ronda hai sconfitto <strong>` +enemyCounter+ `</strong> nemici... </p>
+                        </div>
+                            <h3 id="player-name">Grazie per aver Giocato</h3>
+                            <hr>
+                            <p>
+                            Knights of Gargantua è un progetto realizzato da Mattia Bascelli.
+                            </p>
+                      </div>      
+                    </div>
+                        <div class="col-sm-3">
+                            <!--Personaggio-->
+                            <img src="img/pg_umano.png" class="imgHero" alt="Responsive image" id="pg_umano" />
+                        </div>
+                        <div class="col-sm-3">
+                          
+                        </div>
+                        
+                </div>`
         }, 1000)
-        return new_winner;
+        
         
 
     };
 
-    function restart() {
-        player = {
-            name: 'Il Rinato',
-            level: 1,
-            max_health: 25,
-            health: 1,
-            defense: 0,
-            attack: 4,
-            xp: 0,
-            max_xp: 50,
-            money: 0,
-            max_money: 50,
-            healing_potions: 2,
-            max_potions: 5,
-            weapon_durability: 0,
-            extra_attack: 0,
-            armor_durability: 0
-        }
-        document.getElementById("death-screen").remove();
-        document.getElementById("player").style.display = "inline-block";
-        document.getElementById("enemy").style.display = "inline-block";
-        document.getElementById("game-screen").style.backgroundColor = "none";
-        startPlayer();
-        startEnemy();
-    }
 
     function getLoot() {
         

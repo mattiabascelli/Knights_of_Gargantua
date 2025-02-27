@@ -100,13 +100,6 @@
 
 }
 
-#death-screen {
-    position: absolute;
-    padding-left: 10px;
-    transition: all 1s;
-    min-height: 50vh;
-}
-
 @media screen and (max-width: 760px) {
     .shop button {
         
