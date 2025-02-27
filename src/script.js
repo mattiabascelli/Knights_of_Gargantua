@@ -17,7 +17,11 @@ var player = {
 }
 
 var numz;
-
+var playerLife = 0;
+var playerTotalLife = "width: 100%";
+var enemyLife = "width: 100%";
+var enemyTotalLife = 0;
+var enemyLifeValue = 0;
 var fightCounter = 0;
 
 
@@ -84,11 +88,12 @@ function startGame() {
         if (player.health < (player.max_health / 3)) {
             document.getElementById("player-health").style.color = "red";
             pg_umano.src="img/pg_umano_ferito.png"
+            document.getElementById("heroLife").className = "progress-bar bg-danger";
             
         } else {
             document.getElementById("player-health").style.color = "black";
             pg_umano.src = "img/pg_umano.png"
-            
+            document.getElementById("heroLife").className = "progress-bar bg-success";
         }
 
     }
@@ -101,9 +106,12 @@ function startEnemy() {
         document.getElementById("enemy").classList.remove("hide")
         document.getElementById("enemy-name").textContent = enemy.name[Math.floor(Math.random() * enemy.name.length)] + enemy.title[Math.floor(Math.random() * enemy.title.length)];
         document.getElementById("enemy-level").textContent = Math.floor(Math.random() * parseInt(player.level) + player.level / 3 + 1)
-        document.getElementById("enemy-health").textContent = Math.floor(Math.random() * parseInt(document.getElementById("enemy-level").textContent * 10) + (player.level * 2));
+        enemyTotalLife = Math.floor(Math.random() * parseInt(document.getElementById("enemy-level").textContent * 10) + (player.level * 2));
+        document.getElementById("enemy-health").textContent = enemyTotalLife;
         document.getElementById("enemy-attack").textContent = Math.floor(Math.random() * parseInt(document.getElementById("enemy-level").textContent * 4) + (player.level * 2));
         enemyimg.src = "img/mostro" + numz + ".png";
+        enemyLife = "width: 100%";
+        document.getElementById("monsterlife").style = enemyLife;
         clearMessages();
 
 };
@@ -138,6 +146,9 @@ function attack() {
                     }
                 }
                 document.getElementById("enemy-health").textContent = enemy_health;
+                enemyLifeValue = (100 * enemy_health)/enemyTotalLife;
+                enemyLife = "width: "+enemyLifeValue+"%";
+                document.getElementById("monsterlife").style = enemyLife;
                 sangue();
                 enemy_health > 0 ? enemyAttack() : enemyDeath();
 
@@ -155,6 +166,9 @@ function attack() {
             clearMessages()
             let enemy_attack = parseInt(document.getElementById("enemy-attack").textContent);
             player.defense != 0 ? player.health -= Math.floor(enemy_attack - player.defense) : player.health -= enemy_attack;
+            playerLife = (100 * player.health)/ player.max_health;
+            playerTotalLife = "width: "+playerLife+"%";
+            document.getElementById("heroLife").style = playerTotalLife;
             player.health > 0 ? document.getElementById("hit-message").textContent = "["+fightCounter+"]: Sei stato colpito! Il mostro ti ha inflitto " + (enemy_attack - player.defense) + " danni!" : new_winner = playerDeath();
             if (player.armor_durability > 0) {
                 player.armor_durability--;
@@ -280,8 +294,15 @@ function attack() {
                 if (player.health > player.max_health) {
                     player.health = player.max_health;
                     document.getElementById("miss-message").textContent = "La pozione ti ha curato completamente!";
+                    playerTotalLife = "width: 100%";
+                    document.getElementById("heroLife").style = playerTotalLife;
 
-                } else {document.getElementById("miss-message").textContent = "I tuoi Punti Ferita sono saliti a " + player.health + "!" ;}
+                } else {
+                    document.getElementById("miss-message").textContent = "I tuoi Punti Ferita sono saliti a " + player.health + "!" ;
+                    playerLife = (100 * player.health) / player.max_health;
+                    playerTotalLife = "width: "+playerLife+"%";
+                    document.getElementById("heroLife").style = playerTotalLife;
+                }
             }
         }
         startPlayer();
