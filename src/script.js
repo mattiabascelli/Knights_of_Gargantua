@@ -231,7 +231,7 @@ function attack() {
                         </div>
                         
                 </div>`
-        }, 1000)
+        }, 500)
         
         
 
