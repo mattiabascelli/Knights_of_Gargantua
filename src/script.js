@@ -216,7 +216,9 @@ function attack() {
                             <hr>
                             <p>
                             Knights of Gargantua è un progetto realizzato da Mattia Bascelli.
+                            <br />
                             </p>
+                            <a href=""><button class="button"><strong>Riprova</strong></button></a>
                       </div>      
                     </div>
                         <div class="col-sm-3">
@@ -225,7 +227,7 @@ function attack() {
                             
                         </div>
                         <div class="col-sm-3">
-                          <a href=""><button class="button"><strong>Riprova</strong></button></a>
+                          
                         </div>
                         
                 </div>`
