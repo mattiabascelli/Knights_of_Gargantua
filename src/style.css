@@ -98,16 +98,18 @@
     font-size: 14px;
 }
     
-
+.book {
+    margin-top: 25px;
+    max-height: 350px;
+    text-align: center;
+}
 
 .bought {
 
 }
 
 @media screen and (max-width: 760px) {
-    .shop button {
-        
-    }
+    
 
     #game-screen {
         max-width: 760px
@@ -117,10 +119,8 @@
 
     .shop {
         max-width: 760px
-        transition: all 0.2s ease-in;
     }
 
-   
+}
 
    
-}

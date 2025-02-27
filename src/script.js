@@ -255,11 +255,15 @@ function attack() {
                     </div>
                         <div class="col-sm-3">
                             <!--Personaggio-->
-                            <img src="img/pg_umano.png" class="imgHero" alt="Responsive image" id="pg_umano" />
+                            <img src="img/gargantuaBook.jpg" class="book" alt="Responsive image" id="pg_umano" />
+                            <p>Vuoi provare la versione Cartacea?</p>
                             
                         </div>
                         <div class="col-sm-3">
                           
+                   
+
+               
                         </div>
                         
                 </div>`
