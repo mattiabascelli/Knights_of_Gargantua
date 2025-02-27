@@ -118,7 +118,7 @@ function startEnemy() {
                 document.getElementById("monsterDesc").textContent = "Un tempo era un Umano, la corruzione del vuoto ha plasmato il suo corpo e annabbiato la sua mente. Ora vaga per Gargantua con l'unico scopo di Corrompere o Massacrare chiunque gli sbarri la strada..."
                 break;
             case 2 :
-                document.getElementById("monsterType").textContent = "Aberrazione del Velo";
+                document.getElementById("monsterType").textContent = "Creatura del Velo";
                 document.getElementById("monsterDesc").textContent = "Tra le prime Creature ad apparire dopo che lo squacio del Velo ha permesso alla Corruzione del Vuoto di invadere Gargantua. Un essere spregevole e pericoloso..."
                 break;
             case 3 :
